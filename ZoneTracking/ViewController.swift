@@ -46,7 +46,6 @@ class ViewController: UIViewController {
             }
         }
         
-        self.startBeacons()
         self.btn_startStop.layer.cornerRadius = self.btn_startStop.frame.width / 2.0
         
     }
