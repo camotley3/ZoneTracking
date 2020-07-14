@@ -1,0 +1,6 @@
+module Pods_ZoneTracking {
+  umbrella header "Pods-ZoneTracking-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -7,16 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		384A88B524BCBD5B00894EC3 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 384A88B424BCBD5A00894EC3 /* Models.swift */; };
+		384A88B724BE3BDF00894EC3 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 384A88B624BE3BDF00894EC3 /* Default-568h@2x.png */; };
 		38A5E6B224B4DFAE00D02D81 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A5E6B124B4DFAE00D02D81 /* AppDelegate.swift */; };
 		38A5E6B424B4DFAE00D02D81 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A5E6B324B4DFAE00D02D81 /* SceneDelegate.swift */; };
 		38A5E6B624B4DFAE00D02D81 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A5E6B524B4DFAE00D02D81 /* ViewController.swift */; };
 		38A5E6B924B4DFAE00D02D81 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38A5E6B724B4DFAE00D02D81 /* Main.storyboard */; };
 		38A5E6BB24B4DFB000D02D81 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38A5E6BA24B4DFB000D02D81 /* Assets.xcassets */; };
 		38A5E6BE24B4DFB000D02D81 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38A5E6BC24B4DFB000D02D81 /* LaunchScreen.storyboard */; };
+		38A5E6C824B4E02500D02D81 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A5E6C724B4E02500D02D81 /* Extensions.swift */; };
+		38A5E6CA24B4E20E00D02D81 /* Trilateration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A5E6C924B4E20E00D02D81 /* Trilateration.swift */; };
+		38A5E6D024B4FE5900D02D81 /* FloorPlan.json in Resources */ = {isa = PBXBuildFile; fileRef = 38A5E6CF24B4FE5900D02D81 /* FloorPlan.json */; };
+		97C8C6AFDE78FAC019EC7C26 /* libPods-ZoneTracking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E7ADE007F86388817C16F9D /* libPods-ZoneTracking.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		38A5E6AE24B4DFAE00D02D81 /* RealTracking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RealTracking.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		384A88B424BCBD5A00894EC3 /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		384A88B624BE3BDF00894EC3 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		38A5E6AE24B4DFAE00D02D81 /* ZoneTracking.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZoneTracking.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		38A5E6B124B4DFAE00D02D81 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		38A5E6B324B4DFAE00D02D81 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		38A5E6B524B4DFAE00D02D81 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -24,6 +32,15 @@
 		38A5E6BA24B4DFB000D02D81 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		38A5E6BD24B4DFB000D02D81 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		38A5E6BF24B4DFB000D02D81 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		38A5E6C724B4E02500D02D81 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		38A5E6C924B4E20E00D02D81 /* Trilateration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Trilateration.swift; sourceTree = "<group>"; };
+		38A5E6CD24B4EB6400D02D81 /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
+		38A5E6CF24B4FE5900D02D81 /* FloorPlan.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = FloorPlan.json; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.json; };
+		50F33FB31138372F96EC5F63 /* Pods-RealTracking.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RealTracking.debug.xcconfig"; path = "Target Support Files/Pods-RealTracking/Pods-RealTracking.debug.xcconfig"; sourceTree = "<group>"; };
+		5E7ADE007F86388817C16F9D /* libPods-ZoneTracking.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ZoneTracking.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		902A67378013E00DC7AC127F /* Pods-RealTracking.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RealTracking.release.xcconfig"; path = "Target Support Files/Pods-RealTracking/Pods-RealTracking.release.xcconfig"; sourceTree = "<group>"; };
+		A236B547B6E351401EB49125 /* Pods-ZoneTracking.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZoneTracking.release.xcconfig"; path = "Target Support Files/Pods-ZoneTracking/Pods-ZoneTracking.release.xcconfig"; sourceTree = "<group>"; };
+		CA3E4A56E5F17315C3483EA5 /* Pods-ZoneTracking.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ZoneTracking.debug.xcconfig"; path = "Target Support Files/Pods-ZoneTracking/Pods-ZoneTracking.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,49 +48,86 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				97C8C6AFDE78FAC019EC7C26 /* libPods-ZoneTracking.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		319EC5729082A592DA82AFB2 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				50F33FB31138372F96EC5F63 /* Pods-RealTracking.debug.xcconfig */,
+				902A67378013E00DC7AC127F /* Pods-RealTracking.release.xcconfig */,
+				CA3E4A56E5F17315C3483EA5 /* Pods-ZoneTracking.debug.xcconfig */,
+				A236B547B6E351401EB49125 /* Pods-ZoneTracking.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		38A5E6A524B4DFAE00D02D81 = {
 			isa = PBXGroup;
 			children = (
-				38A5E6B024B4DFAE00D02D81 /* RealTracking */,
+				384A88B624BE3BDF00894EC3 /* Default-568h@2x.png */,
+				38A5E6B024B4DFAE00D02D81 /* ZoneTracking */,
 				38A5E6AF24B4DFAE00D02D81 /* Products */,
+				319EC5729082A592DA82AFB2 /* Pods */,
+				7EB18BB9F624F90DA00E31EF /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
 		38A5E6AF24B4DFAE00D02D81 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				38A5E6AE24B4DFAE00D02D81 /* RealTracking.app */,
+				38A5E6AE24B4DFAE00D02D81 /* ZoneTracking.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		38A5E6B024B4DFAE00D02D81 /* RealTracking */ = {
+		38A5E6B024B4DFAE00D02D81 /* ZoneTracking */ = {
 			isa = PBXGroup;
 			children = (
 				38A5E6B124B4DFAE00D02D81 /* AppDelegate.swift */,
 				38A5E6B324B4DFAE00D02D81 /* SceneDelegate.swift */,
+				38A5E6CD24B4EB6400D02D81 /* Header.h */,
+				38A5E6CF24B4FE5900D02D81 /* FloorPlan.json */,
+				38A5E6CE24B4F3DE00D02D81 /* Helper */,
 				38A5E6B524B4DFAE00D02D81 /* ViewController.swift */,
 				38A5E6B724B4DFAE00D02D81 /* Main.storyboard */,
 				38A5E6BA24B4DFB000D02D81 /* Assets.xcassets */,
 				38A5E6BC24B4DFB000D02D81 /* LaunchScreen.storyboard */,
 				38A5E6BF24B4DFB000D02D81 /* Info.plist */,
 			);
-			path = RealTracking;
+			path = ZoneTracking;
+			sourceTree = "<group>";
+		};
+		38A5E6CE24B4F3DE00D02D81 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				38A5E6C924B4E20E00D02D81 /* Trilateration.swift */,
+				38A5E6C724B4E02500D02D81 /* Extensions.swift */,
+				384A88B424BCBD5A00894EC3 /* Models.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		7EB18BB9F624F90DA00E31EF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5E7ADE007F86388817C16F9D /* libPods-ZoneTracking.a */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		38A5E6AD24B4DFAE00D02D81 /* RealTracking */ = {
+		38A5E6AD24B4DFAE00D02D81 /* ZoneTracking */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 38A5E6C224B4DFB000D02D81 /* Build configuration list for PBXNativeTarget "RealTracking" */;
+			buildConfigurationList = 38A5E6C224B4DFB000D02D81 /* Build configuration list for PBXNativeTarget "ZoneTracking" */;
 			buildPhases = (
+				A3B33FD4D4CF7D780EF364F4 /* [CP] Check Pods Manifest.lock */,
 				38A5E6AA24B4DFAE00D02D81 /* Sources */,
 				38A5E6AB24B4DFAE00D02D81 /* Frameworks */,
 				38A5E6AC24B4DFAE00D02D81 /* Resources */,
@@ -82,9 +136,9 @@
 			);
 			dependencies = (
 			);
-			name = RealTracking;
+			name = ZoneTracking;
 			productName = RealTracking;
-			productReference = 38A5E6AE24B4DFAE00D02D81 /* RealTracking.app */;
+			productReference = 38A5E6AE24B4DFAE00D02D81 /* ZoneTracking.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -102,7 +156,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 38A5E6A924B4DFAE00D02D81 /* Build configuration list for PBXProject "RealTracking" */;
+			buildConfigurationList = 38A5E6A924B4DFAE00D02D81 /* Build configuration list for PBXProject "ZoneTracking" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -115,7 +169,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				38A5E6AD24B4DFAE00D02D81 /* RealTracking */,
+				38A5E6AD24B4DFAE00D02D81 /* ZoneTracking */,
 			);
 		};
 /* End PBXProject section */
@@ -128,17 +182,47 @@
 				38A5E6BE24B4DFB000D02D81 /* LaunchScreen.storyboard in Resources */,
 				38A5E6BB24B4DFB000D02D81 /* Assets.xcassets in Resources */,
 				38A5E6B924B4DFAE00D02D81 /* Main.storyboard in Resources */,
+				384A88B724BE3BDF00894EC3 /* Default-568h@2x.png in Resources */,
+				38A5E6D024B4FE5900D02D81 /* FloorPlan.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		A3B33FD4D4CF7D780EF364F4 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ZoneTracking-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		38A5E6AA24B4DFAE00D02D81 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38A5E6C824B4E02500D02D81 /* Extensions.swift in Sources */,
 				38A5E6B624B4DFAE00D02D81 /* ViewController.swift in Sources */,
+				38A5E6CA24B4E20E00D02D81 /* Trilateration.swift in Sources */,
+				384A88B524BCBD5B00894EC3 /* Models.swift in Sources */,
 				38A5E6B224B4DFAE00D02D81 /* AppDelegate.swift in Sources */,
 				38A5E6B424B4DFAE00D02D81 /* SceneDelegate.swift in Sources */,
 			);
@@ -282,17 +366,20 @@
 		};
 		38A5E6C324B4DFB000D02D81 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = CA3E4A56E5F17315C3483EA5 /* Pods-ZoneTracking.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WC7NAL7AJ4;
-				INFOPLIST_FILE = RealTracking/Info.plist;
+				INFOPLIST_FILE = ZoneTracking/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.connxysTechnology.RealTracking;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/$(PROJECT_NAME)/Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -300,17 +387,20 @@
 		};
 		38A5E6C424B4DFB000D02D81 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A236B547B6E351401EB49125 /* Pods-ZoneTracking.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = WC7NAL7AJ4;
-				INFOPLIST_FILE = RealTracking/Info.plist;
+				INFOPLIST_FILE = ZoneTracking/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.connxysTechnology.RealTracking;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/$(PROJECT_NAME)/Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -319,7 +409,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		38A5E6A924B4DFAE00D02D81 /* Build configuration list for PBXProject "RealTracking" */ = {
+		38A5E6A924B4DFAE00D02D81 /* Build configuration list for PBXProject "ZoneTracking" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				38A5E6C024B4DFB000D02D81 /* Debug */,
@@ -328,7 +418,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		38A5E6C224B4DFB000D02D81 /* Build configuration list for PBXNativeTarget "RealTracking" */ = {
+		38A5E6C224B4DFB000D02D81 /* Build configuration list for PBXNativeTarget "ZoneTracking" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				38A5E6C324B4DFB000D02D81 /* Debug */,
