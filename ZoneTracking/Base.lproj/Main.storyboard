@@ -11,7 +11,7 @@
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="RealTracking" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="ZoneTracking" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -127,11 +127,27 @@
                                     </label>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I1u-9Y-wqI">
+                                <rect key="frame" x="180" y="174" width="54" height="54"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="54" id="Z1J-Lt-7m7"/>
+                                    <constraint firstAttribute="width" secondItem="I1u-9Y-wqI" secondAttribute="height" multiplier="1:1" id="j7h-dN-aax"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                <state key="normal" title="Start">
+                                    <color key="titleColor" red="0.98039215690000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="btn_startStop:" destination="BYZ-38-t0r" eventType="touchUpInside" id="da6-dF-3MN"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="Py6-df-9eM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="3mg-l8-YQk"/>
                             <constraint firstItem="iaL-Wn-CHr" firstAttribute="top" secondItem="O4t-cz-9pN" secondAttribute="bottom" constant="44" id="63z-z8-eG6"/>
+                            <constraint firstItem="I1u-9Y-wqI" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="9Nv-Jj-i3q"/>
                             <constraint firstItem="72l-46-SMM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="9dC-nj-o4h"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="J7q-iV-DjQ" secondAttribute="trailing" constant="8" id="9gL-o2-6Nt"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="O4t-cz-9pN" secondAttribute="trailing" constant="8" id="9xP-JY-JDm"/>
@@ -146,6 +162,7 @@
                             <constraint firstItem="QoR-eH-81K" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="MqL-Vo-gKp"/>
                             <constraint firstItem="cH7-qf-Dpz" firstAttribute="centerY" secondItem="QoR-eH-81K" secondAttribute="centerY" id="OCL-AJ-pYr"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="iaL-Wn-CHr" secondAttribute="trailing" constant="8" id="R0Z-PT-os4"/>
+                            <constraint firstItem="I1u-9Y-wqI" firstAttribute="top" secondItem="bMV-HG-8kQ" secondAttribute="bottom" constant="16" id="RUO-3W-BS5"/>
                             <constraint firstItem="69U-cK-lkJ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="9" id="TZY-5X-pdA"/>
                             <constraint firstItem="O6p-Ik-9Dy" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="TeL-8h-HUH"/>
                             <constraint firstItem="bMV-HG-8kQ" firstAttribute="top" secondItem="QoR-eH-81K" secondAttribute="bottom" id="TwI-a2-NBH"/>
@@ -168,6 +185,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="OmW-AW-MUy"/>
                     <connections>
+                        <outlet property="btn_startStop" destination="I1u-9Y-wqI" id="m9g-Le-U1M"/>
                         <outlet property="txt_glX" destination="dID-OZ-VK2" id="KMS-yx-H8i"/>
                         <outlet property="txt_glY" destination="rZc-Xg-iii" id="Fv0-fk-aNw"/>
                         <outlet property="txt_glZ" destination="OYl-0n-sC0" id="TKS-gA-1vw"/>
@@ -179,7 +197,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1042" y="127"/>
+            <point key="canvasLocation" x="1039.1304347826087" y="126.5625"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="eLi-WP-dcG">

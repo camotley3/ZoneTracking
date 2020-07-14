@@ -20,6 +20,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var txt_llY: UILabel!
     @IBOutlet weak var txt_llZ: UILabel!
     
+    @IBOutlet weak var btn_startStop: UIButton!
+    
     
     let locationManager = CLLocationManager()
     var floorPlan : FloorPlan!
@@ -45,6 +47,7 @@ class ViewController: UIViewController {
         }
         
         self.startBeacons()
+        self.btn_startStop.layer.cornerRadius = self.btn_startStop.frame.width / 2.0
         
     }
     
@@ -73,6 +76,24 @@ class ViewController: UIViewController {
             return true
         }
         return false
+    }
+    
+    
+    var isStarted = false
+    
+    @IBAction func btn_startStop(_ sender: UIButton) {
+        
+        if self.isStarted == false {
+            self.isStarted = true
+            self.startBeacons()
+            self.btn_startStop.setTitle("Stop", for: .normal)
+        }
+        else {
+            self.isStarted = false
+            self.stopBeacons()
+            self.btn_startStop.setTitle("Start", for: .normal)
+        }
+        
     }
     
 }
