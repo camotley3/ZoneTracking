@@ -22,7 +22,6 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var btn_startStop: UIButton!
     
-    
     let locationManager = CLLocationManager()
     var floorPlan : FloorPlan!
     var beaconRegions = [CLBeaconRegion]()
@@ -77,7 +76,6 @@ class ViewController: UIViewController {
         }
         return false
     }
-    
     
     var isStarted = false
     

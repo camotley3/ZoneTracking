@@ -27,8 +27,8 @@ class FloorPlan {
             if let data = NSData(contentsOfFile: path) {
                 
                 let json = try! JSON.init(data: data as Data)
-                self.floorWidth = json["floorWidth"].doubleValue.toMeters()
-                self.floorLength = json["floorLength"].doubleValue.toMeters()
+                self.floorWidth = json["floorWidth"].doubleValue
+                self.floorLength = json["floorLength"].doubleValue
                 
                 for zone in json["zones"].arrayValue {
                     let newZone = Zone(json: zone)
@@ -62,9 +62,9 @@ class Zone {
         
         for poly in json["poly"].arrayValue {
             
-            let x = poly["x"].doubleValue.toMeters()
-            let y = poly["y"].doubleValue.toMeters()
-            let z = poly["z"].doubleValue.toMeters()
+            let x = poly["x"].doubleValue
+            let y = poly["y"].doubleValue
+            let z = poly["z"].doubleValue
             
             let pointFloor = SCNVector3(x, y, z)
             self.polygon.append(pointFloor)
@@ -140,7 +140,7 @@ class Device {
         }
     }
     
-    let rssi_queue = Queue<Int>(length: 10)
+    let rssi_queue = Queue<Int>(length: 5)
     
     var updateTime : TimeInterval!
     
@@ -150,7 +150,6 @@ class Device {
             for value in self.rssi_queue.list {
                 sum += value
             }
-            
             if self.rssi_queue.list.count == 0 {
                 return 0
             }
