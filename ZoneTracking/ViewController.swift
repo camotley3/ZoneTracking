@@ -20,7 +20,20 @@ class ViewController: UIViewController {
     @IBOutlet weak var txt_llY: UILabel!
     @IBOutlet weak var txt_llZ: UILabel!
     
+    @IBOutlet weak var view_container: UIView!
+    
     @IBOutlet weak var btn_startStop: UIButton!
+    
+    let view_marker : UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.widthAnchor.constraint(equalToConstant: 16).isActive = true
+        view.heightAnchor.constraint(equalToConstant: 16).isActive = true
+        view.backgroundColor = UIColor.red
+        view.layer.cornerRadius = 8
+        view.clipsToBounds = true
+        return view
+    }()
     
     let locationManager = CLLocationManager()
     var floorPlan : FloorPlan!
@@ -47,6 +60,7 @@ class ViewController: UIViewController {
         
         self.btn_startStop.layer.cornerRadius = self.btn_startStop.frame.width / 2.0
         
+        self.view_container.addSubview(self.view_marker)
     }
     
     // start region monitoring
@@ -167,6 +181,8 @@ extension ViewController : CLLocationManagerDelegate {
             self.txt_glY.text = "Y: \(pos.y)"
             self.txt_glZ.text = "Z: \(pos.z)"
             
+            self.setPosition(pos: pos)
+            
             let inZone = self.floorPlan.zones.filter { (zone) -> Bool in
                 
                 if zone.contains(point: pos) {
@@ -200,6 +216,22 @@ extension ViewController : CLLocationManagerDelegate {
         }) { (error) in
             print("Error")
         }
+        
+    }
+    
+    
+    func setPosition(pos : SCNVector3!) {
+        
+        let totalWidth = CGFloat(self.floorPlan.floorWidth)
+        let totalLength = CGFloat(self.floorPlan.floorLength)
+        
+        let posWidth = CGFloat(pos.x) / CGFloat(totalWidth)
+        let posLength = CGFloat(pos.y) / CGFloat(totalLength)
+        
+        let posWidthPlan = posWidth * self.view_container.frame.width
+        let posLengthPlan = posLength * self.view_container.frame.height
+        
+        self.view_marker.center = CGPoint(x: posWidthPlan, y: posLengthPlan)
         
     }
     
