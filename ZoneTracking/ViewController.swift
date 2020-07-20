@@ -62,7 +62,11 @@ class ViewController: UIViewController {
         
         self.view_marker.isHidden = true
         self.view_container.addSubview(self.view_marker)
+        self.view_container.clipsToBounds = false
     }
+    
+    
+    var markers = [UIView]()
     
     // start region monitoring
     func startBeacons() {
@@ -73,7 +77,38 @@ class ViewController: UIViewController {
                 self.locationManager.startRangingBeacons(satisfying: beaconRegion.beaconIdentityConstraint)
             }
         }
+        
+        //self.showBeacons()
+        
     }
+    
+    func showBeacons() {
+        
+        for device in self.devices {
+            
+            let marker = UIView()
+            marker.translatesAutoresizingMaskIntoConstraints = false
+            marker.backgroundColor = UIColor.black
+            marker.widthAnchor.constraint(equalToConstant: 8).isActive = true
+            marker.heightAnchor.constraint(equalToConstant: 8).isActive = true
+            marker.layer.cornerRadius = 4
+            self.markers.append(marker)
+            self.view_container.addSubview(marker)
+            self.view_container.bringSubviewToFront(marker)
+            
+            let totalWidth = CGFloat(self.floorPlan.floorWidth)
+            let totalLength = CGFloat(self.floorPlan.floorLength)
+            let ratioWidth = CGFloat(device.floorLoc.x) / CGFloat(totalWidth)
+            let ratioLength = CGFloat(device.floorLoc.y) / CGFloat(totalLength)
+            let posWidthPlan = ratioWidth * self.view_container.frame.width
+            let posLengthPlan = ratioLength * self.view_container.frame.height
+            let planWidth = self.view_container.frame.width - posWidthPlan
+            marker.center = CGPoint(x: planWidth + 8, y: posLengthPlan + 8)
+            
+        }
+        
+    }
+    
     
     // stop region monitoring
     func stopBeacons() {
