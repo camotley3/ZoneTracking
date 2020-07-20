@@ -49,10 +49,10 @@ extension String {
 }
 
 
-/*
+
 extension Double {
     func toMeters() -> Double {
         return self * 0.0254
     }
 }
-*/
+

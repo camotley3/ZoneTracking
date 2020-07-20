@@ -27,8 +27,8 @@ class FloorPlan {
             if let data = NSData(contentsOfFile: path) {
                 
                 let json = try! JSON.init(data: data as Data)
-                self.floorWidth = json["floorWidth"].doubleValue
-                self.floorLength = json["floorLength"].doubleValue
+                self.floorWidth = json["floorWidth"].doubleValue.toMeters()
+                self.floorLength = json["floorLength"].doubleValue.toMeters()
                 
                 for zone in json["zones"].arrayValue {
                     let newZone = Zone(json: zone)
@@ -58,13 +58,13 @@ class Zone {
         self.name = json["name"].stringValue
         
         // zone positions
-        self.height = json["height"].doubleValue
+        self.height = json["height"].doubleValue.toMeters()
         
         for poly in json["poly"].arrayValue {
             
-            let x = poly["x"].doubleValue
-            let y = poly["y"].doubleValue
-            let z = poly["z"].doubleValue
+            let x = poly["x"].doubleValue.toMeters()
+            let y = poly["y"].doubleValue.toMeters()
+            let z = poly["z"].doubleValue.toMeters()
             
             let pointFloor = SCNVector3(x, y, z)
             self.polygon.append(pointFloor)
@@ -174,9 +174,9 @@ class Device {
         self.minorValue = NSNumber(value: device["minor"].intValue)
         self.power = device["power"].doubleValue
         
-        let x = device["x"].doubleValue
-        let y = device["y"].doubleValue
-        let z = device["z"].doubleValue
+        let x = device["x"].doubleValue.toMeters()
+        let y = device["y"].doubleValue.toMeters()
+        let z = device["z"].doubleValue.toMeters()
         self.regionLoc = SCNVector3(x, y, z)
         
         let floorX = self.regionLoc.x + zoneOrigin.x

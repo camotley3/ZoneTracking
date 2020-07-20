@@ -60,6 +60,7 @@ class ViewController: UIViewController {
         
         self.btn_startStop.layer.cornerRadius = self.btn_startStop.frame.width / 2.0
         
+        self.view_marker.isHidden = true
         self.view_container.addSubview(self.view_marker)
     }
     
@@ -163,6 +164,7 @@ extension ViewController : CLLocationManagerDelegate {
         
         // filtering out beacons with nearest distance
         let nearestSortedBeacons = currentDevices.sorted { $0.distance < $1.distance }
+        
         if nearestSortedBeacons.count < 3 {
             
             self.txt_zone.text = "Devices < 3"
@@ -175,13 +177,17 @@ extension ViewController : CLLocationManagerDelegate {
         
         let finalBeacons = Array(nearestSortedBeacons[0...2])
         
-        Trilaterator.shared.trilaterate(finalBeacons, success: { (pos : SCNVector3! ) in
+        Trilaterator.shared.trilaterate(finalBeacons, success: { (global : SCNVector3! ) in
             
+            let pos = SCNVector3( abs(global.x),
+                                  abs(global.y),
+                                  abs(global.z))
+            
+            self.setPosition(pos: pos)
             self.txt_glX.text = "X: \(pos.x)"
             self.txt_glY.text = "Y: \(pos.y)"
             self.txt_glZ.text = "Z: \(pos.z)"
             
-            self.setPosition(pos: pos)
             
             let inZone = self.floorPlan.zones.filter { (zone) -> Bool in
                 
@@ -200,6 +206,7 @@ extension ViewController : CLLocationManagerDelegate {
                 self.txt_llX.text = "X: -"
                 self.txt_llY.text = "Y: -"
                 self.txt_llZ.text = "Z: -"
+                
                 return
             }
             
@@ -222,16 +229,20 @@ extension ViewController : CLLocationManagerDelegate {
     
     func setPosition(pos : SCNVector3!) {
         
+        self.view_marker.isHidden = false
+        
         let totalWidth = CGFloat(self.floorPlan.floorWidth)
         let totalLength = CGFloat(self.floorPlan.floorLength)
         
-        let posWidth = CGFloat(pos.x) / CGFloat(totalWidth)
-        let posLength = CGFloat(pos.y) / CGFloat(totalLength)
+        let ratioWidth = CGFloat(pos.x) / CGFloat(totalWidth)
+        let ratioLength = CGFloat(pos.y) / CGFloat(totalLength)
         
-        let posWidthPlan = posWidth * self.view_container.frame.width
-        let posLengthPlan = posLength * self.view_container.frame.height
+        let posWidthPlan = ratioWidth * self.view_container.frame.width
+        let posLengthPlan = ratioLength * self.view_container.frame.height
         
-        self.view_marker.center = CGPoint(x: posWidthPlan, y: posLengthPlan)
+        let planWidth = self.view_container.frame.width - posWidthPlan
+        
+        self.view_marker.center = CGPoint(x: planWidth + 8, y: posLengthPlan + 8)
         
     }
     
