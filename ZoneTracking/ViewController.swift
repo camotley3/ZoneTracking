@@ -71,10 +71,12 @@ class ViewController: UIViewController {
     // start region monitoring
     func startBeacons() {
         for beaconRegion in self.beaconRegions {
-            //self.locationManager.startMonitoring(for: beaconRegion)
-            self.locationManager.startRangingBeacons(in: beaconRegion)
             if #available(iOS 13.0, *) {
                 self.locationManager.startRangingBeacons(satisfying: beaconRegion.beaconIdentityConstraint)
+            }else {
+                print("Added Beacon!")
+                self.locationManager.startRangingBeacons(in: beaconRegion)
+                self.locationManager.startMonitoring(for: beaconRegion)
             }
         }
         
@@ -162,6 +164,7 @@ extension ViewController : CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], in region: CLBeaconRegion) {
+        print("Count: \(beacons.count)")
         self.updateBeacons(beacons: beacons)
     }
     
@@ -223,6 +226,7 @@ extension ViewController : CLLocationManagerDelegate {
             self.txt_glY.text = "Y: \(pos.y)"
             self.txt_glZ.text = "Z: \(pos.z)"
             
+            self.txt_zone.text = "Zone: -"
             
             let inZone = self.floorPlan.zones.filter { (zone) -> Bool in
                 
