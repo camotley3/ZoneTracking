@@ -80,7 +80,8 @@ class ViewController: UIViewController {
             }
         }
         
-        //self.showBeacons()
+        
+        self.showBeacons()
         
     }
     
@@ -102,10 +103,7 @@ class ViewController: UIViewController {
             let totalLength = CGFloat(self.floorPlan.floorLength)
             let ratioWidth = CGFloat(device.floorLoc.x) / CGFloat(totalWidth)
             let ratioLength = CGFloat(device.floorLoc.y) / CGFloat(totalLength)
-            let posWidthPlan = ratioWidth * self.view_container.frame.width
-            let posLengthPlan = ratioLength * self.view_container.frame.height
-            let planWidth = self.view_container.frame.width - posWidthPlan
-            marker.center = CGPoint(x: planWidth + 8, y: posLengthPlan + 8)
+            marker.center = CGPoint(x: ratioWidth + 8, y: ratioLength + 8)
             
         }
         
@@ -269,21 +267,14 @@ extension ViewController : CLLocationManagerDelegate {
     func setPosition(pos : SCNVector3!) {
         
         self.view_marker.isHidden = false
-        
         let totalWidth = CGFloat(self.floorPlan.floorWidth)
         let totalLength = CGFloat(self.floorPlan.floorLength)
-        
         let ratioWidth = CGFloat(pos.x) / CGFloat(totalWidth)
         let ratioLength = CGFloat(pos.y) / CGFloat(totalLength)
-        
-        let posWidthPlan = ratioWidth * self.view_container.frame.width
-        let posLengthPlan = ratioLength * self.view_container.frame.height
-        
-        let planWidth = self.view_container.frame.width - posWidthPlan
-        
-        self.view_marker.center = CGPoint(x: planWidth + 8, y: posLengthPlan + 8)
+        self.view_marker.center = CGPoint(x: ratioWidth + 8, y: ratioLength + 8)
         
     }
+    
     
 }
 
