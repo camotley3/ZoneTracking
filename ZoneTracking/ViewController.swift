@@ -103,6 +103,7 @@ class ViewController: UIViewController {
             let totalLength = CGFloat(self.floorPlan.floorLength)
             let ratioWidth = CGFloat(device.floorLoc.x) / CGFloat(totalWidth)
             let ratioLength = CGFloat(device.floorLoc.y) / CGFloat(totalLength)
+
             marker.center = CGPoint(x: ratioWidth + 8, y: ratioLength + 8)
             
         }
@@ -271,7 +272,12 @@ extension ViewController : CLLocationManagerDelegate {
         let totalLength = CGFloat(self.floorPlan.floorLength)
         let ratioWidth = CGFloat(pos.x) / CGFloat(totalWidth)
         let ratioLength = CGFloat(pos.y) / CGFloat(totalLength)
-        self.view_marker.center = CGPoint(x: ratioWidth + 8, y: ratioLength + 8)
+        let finalWidth = (1 - ratioWidth) * self.view_container.frame.width
+        let finalLength = ratioLength * self.view_container.frame.height
+        
+        self.view_marker.center = CGPoint(x: finalWidth , y: finalLength )
+        self.view_marker.setNeedsLayout()
+        print("X: \(finalWidth), Y:\(finalLength)" )
         
     }
     
