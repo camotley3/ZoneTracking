@@ -48,7 +48,7 @@
                     "x": 201.0,
                     "y": 130.0,
                     "z": 109.0,
-                    "power": -75
+                    "power": -30
                 },
                 {
                     "deviceID": "2",
@@ -59,7 +59,7 @@
                     "x": 97.0,
                     "y": 236.0,
                     "z": 106.0,
-                    "power": -75
+                    "power": -30
                 },
                 {
                     "deviceID": "3",
@@ -105,8 +105,8 @@
             ],
 
             "devices": [{
-                    "deviceID": "1",
-                    "tag": "Tag 1",
+                    "deviceID": "4",
+                    "tag": "Tag 4",
                     "uuid": "B5B182C7-EAB1-4988-AA99-B5C1517008D9",
                     "major": 1,
                     "minor": 32089,
@@ -116,8 +116,8 @@
                     "power": -75
                 },
                 {
-                    "deviceID": "2",
-                    "tag": "Tag 2",
+                    "deviceID": "5",
+                    "tag": "Tag 5",
                     "uuid": "B5B182C7-EAB1-4988-AA99-B5C1517008D9",
                     "major": 1,
                     "minor": 50962,
@@ -127,8 +127,8 @@
                     "power": -75
                 },
                 {
-                    "deviceID": "3",
-                    "tag": "Tag 3",
+                    "deviceID": "6",
+                    "tag": "Tag 6",
                     "uuid": "B5B182C7-EAB1-4988-AA99-B5C1517008D9",
                     "major": 1,
                     "minor": 24630,
@@ -170,8 +170,8 @@
             ],
             
             "devices": [{
-                    "deviceID": "1",
-                    "tag": "Tag 1",
+                    "deviceID": "7",
+                    "tag": "Tag 7",
                     "uuid": "B5B182C7-EAB1-4988-AA99-B5C1517008D9",
                     "major": 1,
                     "minor": 47411,
@@ -181,8 +181,8 @@
                     "power": -75
                 },
                 {
-                    "deviceID": "2",
-                    "tag": "Tag 2",
+                    "deviceID": "8",
+                    "tag": "Tag 8",
                     "uuid": "B5B182C7-EAB1-4988-AA99-B5C1517008D9",
                     "major": 1,
                     "minor": 61723,
@@ -192,8 +192,8 @@
                     "power": -75
                 },
                 {
-                    "deviceID": "3",
-                    "tag": "Tag 3",
+                    "deviceID": "9",
+                    "tag": "Tag 9",
                     "uuid": "B5B182C7-EAB1-4988-AA99-B5C1517008D9",
                     "major": 1,
                     "minor": 43682,
@@ -272,8 +272,8 @@
         },
         
         {
-            "zoneID": 4,
-            "name": "Zone 4",
+            "zoneID": 5,
+            "name": "Zone 5",
             "height": 236.0,
             "poly": [{
                     "x": 6.16,

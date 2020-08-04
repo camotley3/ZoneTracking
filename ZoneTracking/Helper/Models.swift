@@ -45,11 +45,15 @@ class Zone {
     
     let zoneID : Int!
     let name : String!
-    var height : Double!
     
     var polygon = [SCNVector3]()
     var originPt : SCNVector3!
     var endPt : SCNVector3!
+    
+    var width : Double!
+    var length : Double!
+    var height : Double!
+    
     var devices = [Device]()
     
     init(json : JSON) {
@@ -57,7 +61,6 @@ class Zone {
         self.zoneID = json["zoneID"].intValue
         self.name = json["name"].stringValue
         
-        // zone positions
         self.height = json["height"].doubleValue.toMeters()
         
         for poly in json["poly"].arrayValue {
@@ -82,6 +85,9 @@ class Zone {
         
         self.originPt = SCNVector3(minXPt!.x, minYPt!.y, minZPt!.z)
         self.endPt = SCNVector3(maxXPt!.x, maxYPt!.y, maxZPt!.z)
+        
+        self.width = Double(self.endPt.x - self.originPt.x)
+        self.length = Double(self.endPt.y - self.originPt.y)
         
         for device in json["devices"].arrayValue {
             let newDevice = Device(device: device, zoneOrigin: self.originPt)
