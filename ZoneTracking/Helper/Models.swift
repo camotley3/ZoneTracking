@@ -89,6 +89,8 @@ class Zone {
         self.width = Double(self.endPt.x - self.originPt.x)
         self.length = Double(self.endPt.y - self.originPt.y)
         
+        print(max(self.width, self.length))
+        
         for device in json["devices"].arrayValue {
             let newDevice = Device(device: device, zoneOrigin: self.originPt)
             newDevice.zoneID = self.zoneID

@@ -32,6 +32,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var lbl_length: UILabel!
     @IBOutlet weak var lbl_height: UILabel!
     
+    // -8 -70 dbm
+    
     var logRows = [[String]]()
     
     let view_marker : UIView = {
@@ -130,8 +132,6 @@ class ViewController: UIViewController {
             let ratioLength = CGFloat(device.floorLoc.y) / CGFloat(totalLength)
             let finalWidth = (1 - ratioWidth) * self.view_container.frame.width
             let finalLength = ratioLength * self.view_container.frame.height
-            
-            print("contW:\(self.view_container.frame.width), contL:\(self.view_container.frame.height), finalW:\(finalWidth), finalL:\(finalLength)")
             
             DispatchQueue.main.async {
                 marker.center = CGPoint(x: finalWidth, y: finalLength)
