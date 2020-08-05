@@ -179,10 +179,18 @@
                                     <action selector="btn:" destination="BYZ-38-t0r" eventType="valueChanged" id="dwy-Hv-Gep"/>
                                 </connections>
                             </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tK8-6N-Zje">
+                                <rect key="frame" x="361" y="49" width="45" height="30"/>
+                                <state key="normal" title="Export"/>
+                                <connections>
+                                    <action selector="btn_export:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7JY-3E-n4U"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="RhQ-y7-bxY" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.4" id="2Um-Kk-6tO"/>
+                            <constraint firstItem="tK8-6N-Zje" firstAttribute="centerY" secondItem="vNw-Ce-xiz" secondAttribute="centerY" id="343-np-wcy"/>
                             <constraint firstItem="Py6-df-9eM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="3mg-l8-YQk"/>
                             <constraint firstItem="Jn0-pM-id8" firstAttribute="leading" secondItem="I1u-9Y-wqI" secondAttribute="trailing" constant="13" id="4fs-lG-wUs"/>
                             <constraint firstItem="Jn0-pM-id8" firstAttribute="centerY" secondItem="I1u-9Y-wqI" secondAttribute="centerY" id="4lw-p7-3hS"/>
@@ -192,6 +200,7 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="O4t-cz-9pN" secondAttribute="trailing" constant="8" id="9xP-JY-JDm"/>
                             <constraint firstItem="J7q-iV-DjQ" firstAttribute="leading" secondItem="72l-46-SMM" secondAttribute="trailing" constant="8" id="ACr-Wg-RrL"/>
                             <constraint firstItem="dKS-iL-8LT" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Agz-z7-lMe"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="tK8-6N-Zje" secondAttribute="trailing" constant="8" id="Ahk-vi-iKl"/>
                             <constraint firstItem="iaL-Wn-CHr" firstAttribute="top" secondItem="69U-cK-lkJ" secondAttribute="bottom" id="CVM-58-scD"/>
                             <constraint firstItem="bMV-HG-8kQ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="ESb-iG-XQL"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="cH7-qf-Dpz" secondAttribute="trailing" constant="8" id="F6Q-Y1-pst"/>

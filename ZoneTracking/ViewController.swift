@@ -9,6 +9,7 @@
 import UIKit
 import SceneKit
 import CoreLocation
+import MessageUI
 
 class ViewController: UIViewController {
     
@@ -51,11 +52,12 @@ class ViewController: UIViewController {
     
     let UPDATE_SECONDS : TimeInterval = 5
     
+    let csvHeaderRow = ["sn", "time" ,"zone", "t_zone", "b1Tag", "b2Tag", "b3Tag", "b1r", "b2r", "b3r", "b1d", "b2d", "b3d", "x", "y", "z", "xz", "yz", "zz", "xg", "yg", "zg"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.locationManager.requestAlwaysAuthorization()
-        
         self.locationManager.delegate = self
         self.floorPlan = FloorPlan(fileName: "FloorPlan", ext: "json")
         
@@ -80,13 +82,12 @@ class ViewController: UIViewController {
         self.view_sliderY.maximumValue = Float(self.floorPlan.zones[0].length)
         self.view_sliderZ.maximumValue = Float(self.floorPlan.zones[0].height)
         
-        let csvHeaderRow = ["sn", "time" ,"zone", "t_zone", "b1ID", "b2ID", "b3ID", "b1d", "b2d", "b3d", "x", "y", "z", "xt", "yt", "zt"]
-        
+        self.logRows.append(csvHeaderRow)
     }
-    
     
     // start region monitoring
     func startBeacons() {
+        
         for beaconRegion in self.beaconRegions {
             if #available(iOS 13.0, *) {
                 self.locationManager.startRangingBeacons(satisfying: beaconRegion.beaconIdentityConstraint)
@@ -96,37 +97,48 @@ class ViewController: UIViewController {
             }
         }
         
-        self.showBeacons()
+        DispatchQueue.main.async {
+            self.showBeacons()
+        }
     }
     
     
     var markers = [UIView]()
+    var isBeaconShown = false
     
     func showBeacons() {
+        
+        if self.isBeaconShown == true {
+            return
+        }
+        self.isBeaconShown = true
         
         for device in self.devices {
             
             let marker = UIView()
             marker.translatesAutoresizingMaskIntoConstraints = false
+            self.markers.append(marker)
+            self.view_container.addSubview(marker)
             marker.backgroundColor = UIColor.blue
             marker.widthAnchor.constraint(equalToConstant: 8).isActive = true
             marker.heightAnchor.constraint(equalToConstant: 8).isActive = true
             marker.layer.cornerRadius = 4
-            self.markers.append(marker)
-            self.view_container.addSubview(marker)
-            self.view_container.bringSubviewToFront(marker)
             
             let totalWidth = CGFloat(self.floorPlan.floorWidth)
             let totalLength = CGFloat(self.floorPlan.floorLength)
             let ratioWidth = CGFloat(device.floorLoc.x) / CGFloat(totalWidth)
             let ratioLength = CGFloat(device.floorLoc.y) / CGFloat(totalLength)
-
-            marker.center = CGPoint(x: ratioWidth + 8, y: ratioLength + 8)
+            let finalWidth = (1 - ratioWidth) * self.view_container.frame.width
+            let finalLength = ratioLength * self.view_container.frame.height
             
+            print("contW:\(self.view_container.frame.width), contL:\(self.view_container.frame.height), finalW:\(finalWidth), finalL:\(finalLength)")
+            
+            DispatchQueue.main.async {
+                marker.center = CGPoint(x: finalWidth, y: finalLength)
+                marker.setNeedsLayout()
+            }
         }
-        
     }
-    
     
     // stop region monitoring
     func stopBeacons() {
@@ -149,10 +161,9 @@ class ViewController: UIViewController {
         return false
     }
     
-    var isStarted = false
     
+    var isStarted = false
     @IBAction func btn_startStop(_ sender: UIButton) {
-        
         if self.isStarted == false {
             self.isStarted = true
             self.startBeacons()
@@ -213,6 +224,45 @@ class ViewController: UIViewController {
             self.view_sliderX.maximumValue = Float(self.floorPlan.zones[2].width)
             self.view_sliderY.maximumValue = Float(self.floorPlan.zones[2].length)
             self.view_sliderZ.maximumValue = Float(self.floorPlan.zones[2].height)
+        }
+        
+    }
+    
+    
+    @IBAction func btn_export(_ sender: UIButton) {
+        
+        if self.isStarted == true {
+            self.btn_startStop(UIButton())
+        }
+        
+        var finalString = ""
+        
+        for i in 0..<self.logRows.count {
+            for j in 0..<self.logRows[i].count {
+                finalString.append(self.logRows[i][j])
+                finalString.append(",")
+            }
+            finalString.append("\n")
+        }
+        
+        let df = DateFormatter()
+        df.dateFormat = "dd-mm___hh-mm"
+        let dateString = df.string(from: Date())
+        
+        // export
+        let fileName = "logs - \(dateString)"
+        let docDirectory = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+        
+        if let fileURL = docDirectory?.appendingPathComponent(fileName).appendingPathExtension("csv") {
+            do {
+                try finalString.write(to: fileURL, atomically: true, encoding: .utf8)
+                let activityVC = UIActivityViewController(activityItems: [fileURL], applicationActivities: nil)
+                activityVC.excludedActivityTypes = [UIActivity.ActivityType.addToReadingList]
+                self.present(activityVC, animated: true, completion: nil)
+                
+            } catch let error as NSError {
+                print("Failed writing to URL: \(fileURL), Error: " + error.localizedDescription)
+            }
         }
         
     }
@@ -288,12 +338,10 @@ extension ViewController : CLLocationManagerDelegate {
         let nearestSortedBeacons = currentDevices.sorted { $0.distance < $1.distance }
         
         if nearestSortedBeacons.count < 3 {
-            
             self.txt_zone.text = "Devices < 3"
             self.txt_llX.text = "X: -"
             self.txt_llY.text = "Y: -"
             self.txt_llZ.text = "Z: -"
-            
             return
         }
         
@@ -301,9 +349,7 @@ extension ViewController : CLLocationManagerDelegate {
         
         Trilaterator.shared.trilaterate(finalBeacons, success: { (global : SCNVector3! ) in
             
-            
-            let row = [String]()
-            
+            var rowDict:[String?:String?] = [String:String]()
             
             let pos = SCNVector3( abs(global.x),
                                   abs(global.y),
@@ -314,7 +360,9 @@ extension ViewController : CLLocationManagerDelegate {
             self.txt_glY.text = "Y: \(pos.y)"
             self.txt_glZ.text = "Z: \(pos.z)"
             
-            self.txt_zone.text = "Zone: -"
+            rowDict["sn"] = "\(self.logRows.count - 1)"
+            rowDict["time"] = "\(Date().timeIntervalSince1970)"
+            rowDict["zone"] = "\(self.selectedZone + 1)"
             
             let inZone = self.floorPlan.zones.filter { (zone) -> Bool in
                 
@@ -334,18 +382,56 @@ extension ViewController : CLLocationManagerDelegate {
                 self.txt_llY.text = "Y: -"
                 self.txt_llZ.text = "Z: -"
                 
+                rowDict["zone_t"] = "-"
+                rowDict["xz"] = "-"
+                rowDict["yz"] = "-"
+                rowDict["zz"] = "-"
+                
                 return
             }
+            else {
+                
+                self.txt_zone.text = "Zone: \(inZone!.name!)"
+                let locX = pos.x -  inZone!.originPt.x
+                let locY = pos.y -  inZone!.originPt.y
+                let locZ = pos.z -  inZone!.originPt.z
+                self.txt_llX.text = "X: \(locX)"
+                self.txt_llY.text = "Y: \(locY)"
+                self.txt_llZ.text = "Z: \(locZ)"
+                
+                rowDict["zone_t"] = "\(inZone!.zoneID!)"
+                rowDict["xz"] = "\(locX)"
+                rowDict["yz"] = "\(locY)"
+                rowDict["zz"] = "\(locZ)"
+                
+            }
             
-            self.txt_zone.text = "Zone: \(inZone!.name!)"
+            rowDict["b1Tag"] = "\(finalBeacons[0].deviceID!)"
+            rowDict["b2Tag"] = "\(finalBeacons[1].deviceID!)"
+            rowDict["b3Tag"] = "\(finalBeacons[2].deviceID!)"
             
-            let locX = pos.x -  inZone!.originPt.x
-            let locY = pos.y -  inZone!.originPt.y
-            let locZ = pos.z -  inZone!.originPt.z
+            rowDict["b1r"] = "\(finalBeacons[0].avg_rssi)"
+            rowDict["b2r"] = "\(finalBeacons[1].avg_rssi)"
+            rowDict["b3r"] = "\(finalBeacons[2].avg_rssi)"
             
-            self.txt_llX.text = "X: \(locX)"
-            self.txt_llY.text = "Y: \(locY)"
-            self.txt_llZ.text = "Z: \(locZ)"
+            rowDict["b1d"] = "\(finalBeacons[0].distance)"
+            rowDict["b2d"] = "\(finalBeacons[1].distance)"
+            rowDict["b3d"] = "\(finalBeacons[2].distance)"
+            
+            rowDict["x"] = "\(self.view_sliderX.value)"
+            rowDict["y"] = "\(self.view_sliderY.value)"
+            rowDict["z"] = "\(self.view_sliderZ.value)"
+            
+            rowDict["xg"] = "\(pos.x)"
+            rowDict["yg"] = "\(pos.y)"
+            rowDict["zg"] = "\(pos.z)"
+            
+            var finalRow = [String]()
+            for key in self.csvHeaderRow {
+                finalRow.append(rowDict[key]!!)
+            }
+            
+            self.logRows.append(finalRow)
             
         }) { (error) in
             print("Error")
@@ -366,7 +452,6 @@ extension ViewController : CLLocationManagerDelegate {
         
         self.view_marker.center = CGPoint(x: finalWidth , y: finalLength )
         self.view_marker.setNeedsLayout()
-        print("X: \(finalWidth), Y:\(finalLength)" )
         
     }
     
