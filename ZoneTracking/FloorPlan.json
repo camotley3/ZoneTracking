@@ -1,7 +1,7 @@
 {
     "floorWidth": 237.79,
     "floorLength": 362.2,
-
+    
     "zones": [{
             "zoneID": 1,
             "name": "Zone 1",
@@ -40,7 +40,7 @@
                 
             ],
             "devices": [{
-                    "deviceID": "1",
+                    "deviceID": "11",
                     "tag": "Tag 1",
                     "uuid": "B5B182C7-EAB1-4988-AA99-B5C1517008D9",
                     "major": 1,
@@ -48,10 +48,10 @@
                     "x": 201.0,
                     "y": 130.0,
                     "z": 109.0,
-                    "power": -64
+                    "power": -70
                 },
                 {
-                    "deviceID": "2",
+                    "deviceID": "12",
                     "tag": "Tag 2",
                     "uuid": "B5B182C7-EAB1-4988-AA99-B5C1517008D9",
                     "major": 1,
@@ -59,10 +59,10 @@
                     "x": 97.0,
                     "y": 236.0,
                     "z": 106.0,
-                    "power": -64
+                    "power": -70
                 },
                 {
-                    "deviceID": "3",
+                    "deviceID": "13",
                     "tag": "Tag 3",
                     "uuid": "B5B182C7-EAB1-4988-AA99-B5C1517008D9",
                     "major": 1,
@@ -70,7 +70,7 @@
                     "x": 11.0,
                     "y": 118.0,
                     "z": 94.0,
-                    "power": -64
+                    "power": -70
                 }
 
             ]
@@ -105,7 +105,7 @@
             ],
 
             "devices": [{
-                    "deviceID": "4",
+                    "deviceID": "21",
                     "tag": "Tag 4",
                     "uuid": "B5B182C7-EAB1-4988-AA99-B5C1517008D9",
                     "major": 1,
@@ -113,10 +113,10 @@
                     "x": 50.0,
                     "y": 0,
                     "z": 102.0,
-                    "power": -64
+                    "power": -70
                 },
                 {
-                    "deviceID": "5",
+                    "deviceID": "22",
                     "tag": "Tag 5",
                     "uuid": "B5B182C7-EAB1-4988-AA99-B5C1517008D9",
                     "major": 1,
@@ -124,10 +124,10 @@
                     "x": 121.0,
                     "y": 55.0,
                     "z": 102.0,
-                    "power": -64
+                    "power": -70
                 },
                 {
-                    "deviceID": "6",
+                    "deviceID": "23",
                     "tag": "Tag 6",
                     "uuid": "B5B182C7-EAB1-4988-AA99-B5C1517008D9",
                     "major": 1,
@@ -135,7 +135,7 @@
                     "x": 63.0,
                     "y": 110.0,
                     "z": 105.0,
-                    "power": -64
+                    "power": -70
                 }
 
             ]
@@ -170,7 +170,7 @@
             ],
             
             "devices": [{
-                    "deviceID": "7",
+                    "deviceID": "31",
                     "tag": "Tag 7",
                     "uuid": "B5B182C7-EAB1-4988-AA99-B5C1517008D9",
                     "major": 1,
@@ -178,10 +178,10 @@
                     "x": 42.0,
                     "y": 0.0,
                     "z": 99.0,
-                    "power": -64
+                    "power": -70
                 },
                 {
-                    "deviceID": "8",
+                    "deviceID": "32",
                     "tag": "Tag 8",
                     "uuid": "B5B182C7-EAB1-4988-AA99-B5C1517008D9",
                     "major": 1,
@@ -189,10 +189,10 @@
                     "x": 88.0,
                     "y": 51.0,
                     "z": 95.0,
-                    "power": -64
+                    "power": -70
                 },
                 {
-                    "deviceID": "9",
+                    "deviceID": "33",
                     "tag": "Tag 9",
                     "uuid": "B5B182C7-EAB1-4988-AA99-B5C1517008D9",
                     "major": 1,
@@ -200,7 +200,7 @@
                     "x": 56.0,
                     "y": 102.0,
                     "z": 103.0,
-                    "power": -64
+                    "power": -70
                 }
 
             ]

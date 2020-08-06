@@ -89,8 +89,6 @@ class Zone {
         self.width = Double(self.endPt.x - self.originPt.x)
         self.length = Double(self.endPt.y - self.originPt.y)
         
-        print(max(self.width, self.length))
-        
         for device in json["devices"].arrayValue {
             let newDevice = Device(device: device, zoneOrigin: self.originPt)
             newDevice.zoneID = self.zoneID
@@ -103,9 +101,9 @@ class Zone {
     func contains(point: SCNVector3) -> Bool {
         
         if point.x >= self.originPt.x && point.x <= self.endPt.x
-        && point.y >= self.originPt.y && point.y <= self.endPt.y
-        && point.z >= self.originPt.z && point.z <= self.endPt.z {
-            return true
+            && point.y >= self.originPt.y && point.y <= self.endPt.y
+            /*&& point.z >= self.originPt.z && point.z <= self.endPt.z*/ {
+                return true
         }
         else {
             return false
@@ -148,7 +146,7 @@ class Device {
         }
     }
     
-    let rssi_queue = Queue<Int>(length: 5)
+    let rssi_queue = Queue<Int>(length: 1)
     
     var updateTime : TimeInterval!
     

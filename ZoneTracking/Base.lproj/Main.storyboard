@@ -136,18 +136,17 @@
                                     </label>
                                 </subviews>
                             </stackView>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RhQ-y7-bxY">
-                                <rect key="frame" x="88.5" y="145" width="237" height="358.5"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RhQ-y7-bxY">
+                                <rect key="frame" x="-183" y="145" width="780" height="358.5"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fp" translatesAutoresizingMaskIntoConstraints="NO" id="yaN-9O-lSC">
-                                        <rect key="frame" x="0.0" y="0.0" width="237" height="358.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="780" height="358.5"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="yaN-9O-lSC" secondAttribute="bottom" id="F72-Ij-DyZ"/>
-                                    <constraint firstAttribute="width" secondItem="RhQ-y7-bxY" secondAttribute="height" multiplier="780:1180" id="cqO-PC-W8B"/>
                                     <constraint firstAttribute="trailing" secondItem="yaN-9O-lSC" secondAttribute="trailing" id="kLb-wH-5N5"/>
                                     <constraint firstItem="yaN-9O-lSC" firstAttribute="leading" secondItem="RhQ-y7-bxY" secondAttribute="leading" id="kmC-7s-Yb2"/>
                                     <constraint firstItem="yaN-9O-lSC" firstAttribute="top" secondItem="RhQ-y7-bxY" secondAttribute="top" id="wjQ-kE-iVa"/>
@@ -186,6 +185,12 @@
                                     <action selector="btn_export:" destination="BYZ-38-t0r" eventType="touchUpInside" id="7JY-3E-n4U"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wcm-ux-xXy">
+                                <rect key="frame" x="8" y="55.5" width="35.5" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -220,6 +225,7 @@
                             <constraint firstItem="vNw-Ce-xiz" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="XMN-k1-frJ"/>
                             <constraint firstItem="vNw-Ce-xiz" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="cac-Bw-M3Q"/>
                             <constraint firstItem="TW8-Rz-n3g" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" constant="-8" id="dVS-ci-Mub"/>
+                            <constraint firstItem="Wcm-ux-xXy" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="dfm-c1-UmI"/>
                             <constraint firstItem="dKS-iL-8LT" firstAttribute="top" secondItem="72l-46-SMM" secondAttribute="bottom" id="g40-kf-Bl8"/>
                             <constraint firstAttribute="trailing" secondItem="bMV-HG-8kQ" secondAttribute="trailing" constant="8" id="hMe-za-uKy"/>
                             <constraint firstItem="TW8-Rz-n3g" firstAttribute="top" secondItem="O6p-Ik-9Dy" secondAttribute="bottom" id="hNE-D4-Uj9"/>
@@ -231,6 +237,7 @@
                             <constraint firstItem="cH7-qf-Dpz" firstAttribute="leading" secondItem="QoR-eH-81K" secondAttribute="trailing" constant="8" id="pWY-3y-KQT"/>
                             <constraint firstItem="TW8-Rz-n3g" firstAttribute="top" secondItem="iaL-Wn-CHr" secondAttribute="bottom" constant="16" id="sba-QP-ar5"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="dKS-iL-8LT" secondAttribute="trailing" constant="8" id="vh0-Fg-yUS"/>
+                            <constraint firstItem="Wcm-ux-xXy" firstAttribute="centerY" secondItem="vNw-Ce-xiz" secondAttribute="centerY" id="vhG-VB-7yp"/>
                             <constraint firstItem="TW8-Rz-n3g" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="zcO-7x-KVF"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -238,6 +245,7 @@
                     <navigationItem key="navigationItem" id="OmW-AW-MUy"/>
                     <connections>
                         <outlet property="btn_startStop" destination="I1u-9Y-wqI" id="m9g-Le-U1M"/>
+                        <outlet property="lbl_count" destination="Wcm-ux-xXy" id="UOV-zZ-4ee"/>
                         <outlet property="lbl_height" destination="O6p-Ik-9Dy" id="bo5-qE-KFQ"/>
                         <outlet property="lbl_length" destination="69U-cK-lkJ" id="tFO-dI-sDW"/>
                         <outlet property="lbl_width" destination="Py6-df-9eM" id="AjN-Fq-398"/>

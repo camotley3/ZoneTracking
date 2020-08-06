@@ -32,7 +32,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var lbl_length: UILabel!
     @IBOutlet weak var lbl_height: UILabel!
     
-    // -8 -70 dbm
+    @IBOutlet weak var lbl_count: UILabel!
+    
+    // -8dmb -70dbm
     
     var logRows = [[String]]()
     
@@ -54,14 +56,24 @@ class ViewController: UIViewController {
     
     let UPDATE_SECONDS : TimeInterval = 5
     
-    let csvHeaderRow = ["sn", "time" ,"zone", "t_zone", "b1Tag", "b2Tag", "b3Tag", "b1r", "b2r", "b3r", "b1d", "b2d", "b3d", "x", "y", "z", "xz", "yz", "zz", "xg", "yg", "zg"]
+    let csvHeaderRow = ["sn", "time" ,"zone", "tzone", "b1Tag", "b2Tag", "b3Tag", "b1r", "b2r", "b3r", "b1d", "b2d", "b3d", "x", "y", "z", "xz", "yz", "zz", "xg", "yg", "zg"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.locationManager.requestAlwaysAuthorization()
         self.locationManager.delegate = self
-        self.floorPlan = FloorPlan(fileName: "FloorPlan", ext: "json")
+        
+        
+        self.floorPlan = FloorPlan(fileName: "FloorPlanHome", ext: "json")
+        self.view_container.subviews.first?.isHidden = true
+        self.view_container.backgroundColor = UIColor.gray
+        self.view_container.widthAnchor.constraint(equalTo: self.view_container.heightAnchor, multiplier: 21.0/18.0).isActive = true
+        
+        /*
+         self.floorPlan = FloorPlan(fileName: "FloorPlan", ext: "json")
+         self.view_container.widthAnchor.constraint(equalTo: self.view_container.heightAnchor, multiplier: 780.0/1180.0).isActive = true
+         */
         
         // extract devices and beaconregions for later use
         for zone in self.floorPlan.zones {
@@ -75,7 +87,6 @@ class ViewController: UIViewController {
         
         self.view_marker.isHidden = true
         self.view_container.addSubview(self.view_marker)
-        self.view_container.clipsToBounds = false
         
         self.view_sliderX.value = 0
         self.view_sliderY.value = 0
@@ -113,6 +124,7 @@ class ViewController: UIViewController {
         if self.isBeaconShown == true {
             return
         }
+        
         self.isBeaconShown = true
         
         for device in self.devices {
@@ -298,7 +310,6 @@ extension ViewController : CLLocationManagerDelegate {
     }
     
     func locationManager(_ manager: CLLocationManager, didRangeBeacons beacons: [CLBeacon], in region: CLBeaconRegion) {
-        print("Count: \(beacons.count)")
         self.updateBeacons(beacons: beacons)
     }
     
@@ -345,35 +356,45 @@ extension ViewController : CLLocationManagerDelegate {
             return
         }
         
-        let finalBeacons = Array(nearestSortedBeacons[0...2])
+        // 3 unique nearest beacons
+        var finalBeacons = [Device]()
+        for beacon in nearestSortedBeacons {
+            var isInFinal = false
+            for finalBeacon in finalBeacons {
+                if finalBeacon.uuid == beacon.uuid  && finalBeacon.majorValue == beacon.majorValue && finalBeacon.minorValue == beacon.minorValue {
+                    isInFinal = true
+                }
+            }
+            if isInFinal == false {
+                finalBeacons.append(beacon)
+            }
+            if finalBeacons.count == 3 {
+                break
+            }
+        }
+        
         
         Trilaterator.shared.trilaterate(finalBeacons, success: { (global : SCNVector3! ) in
             
             var rowDict:[String?:String?] = [String:String]()
             
-            let pos = SCNVector3( abs(global.x),
-                                  abs(global.y),
-                                  abs(global.z))
-            
-            self.setPosition(pos: pos)
-            self.txt_glX.text = "X: \(pos.x)"
-            self.txt_glY.text = "Y: \(pos.y)"
-            self.txt_glZ.text = "Z: \(pos.z)"
+            self.txt_glX.text = "X: \(global.x)"
+            self.txt_glY.text = "Y: \(global.y)"
+            self.txt_glZ.text = "Z: \(global.z)"
             
             rowDict["sn"] = "\(self.logRows.count - 1)"
             rowDict["time"] = "\(Date().timeIntervalSince1970)"
             rowDict["zone"] = "\(self.selectedZone + 1)"
             
             let inZone = self.floorPlan.zones.filter { (zone) -> Bool in
-                
-                if zone.contains(point: pos) {
+                if zone.contains(point: global) {
                     return true
                 }
                 else {
                     return false
                 }
-                
             }.first
+            
             
             if inZone == nil {
                 // TODO
@@ -382,28 +403,24 @@ extension ViewController : CLLocationManagerDelegate {
                 self.txt_llY.text = "Y: -"
                 self.txt_llZ.text = "Z: -"
                 
-                rowDict["zone_t"] = "-"
+                rowDict["tzone"] = "-"
                 rowDict["xz"] = "-"
                 rowDict["yz"] = "-"
                 rowDict["zz"] = "-"
-                
-                return
             }
             else {
-                
                 self.txt_zone.text = "Zone: \(inZone!.name!)"
-                let locX = pos.x -  inZone!.originPt.x
-                let locY = pos.y -  inZone!.originPt.y
-                let locZ = pos.z -  inZone!.originPt.z
+                let locX = global.x -  inZone!.originPt.x
+                let locY = global.y -  inZone!.originPt.y
+                let locZ = global.z -  inZone!.originPt.z
                 self.txt_llX.text = "X: \(locX)"
                 self.txt_llY.text = "Y: \(locY)"
                 self.txt_llZ.text = "Z: \(locZ)"
                 
-                rowDict["zone_t"] = "\(inZone!.zoneID!)"
+                rowDict["tzone"] = "\(inZone!.zoneID!)"
                 rowDict["xz"] = "\(locX)"
                 rowDict["yz"] = "\(locY)"
                 rowDict["zz"] = "\(locZ)"
-                
             }
             
             rowDict["b1Tag"] = "\(finalBeacons[0].deviceID!)"
@@ -422,9 +439,9 @@ extension ViewController : CLLocationManagerDelegate {
             rowDict["y"] = "\(self.view_sliderY.value)"
             rowDict["z"] = "\(self.view_sliderZ.value)"
             
-            rowDict["xg"] = "\(pos.x)"
-            rowDict["yg"] = "\(pos.y)"
-            rowDict["zg"] = "\(pos.z)"
+            rowDict["xg"] = "\(global.x)"
+            rowDict["yg"] = "\(global.y)"
+            rowDict["zg"] = "\(global.z)"
             
             var finalRow = [String]()
             for key in self.csvHeaderRow {
@@ -432,24 +449,30 @@ extension ViewController : CLLocationManagerDelegate {
             }
             
             self.logRows.append(finalRow)
+            self.lbl_count.text = "Log: \(self.logRows.count - 1)"
+            
+            if global.x.isNaN || global.y.isNaN || global.z.isNaN {
+                
+            }
+            else {
+                self.setPosition(pos: global)
+            }
             
         }) { (error) in
-            print("Error")
+            print("Trilateration Error")
         }
         
     }
     
     
     func setPosition(pos : SCNVector3!) {
-        
         self.view_marker.isHidden = false
         let totalWidth = CGFloat(self.floorPlan.floorWidth)
         let totalLength = CGFloat(self.floorPlan.floorLength)
         let ratioWidth = CGFloat(pos.x) / CGFloat(totalWidth)
         let ratioLength = CGFloat(pos.y) / CGFloat(totalLength)
-        let finalWidth = (1 - ratioWidth) * self.view_container.frame.width
-        let finalLength = ratioLength * self.view_container.frame.height
-        
+        let finalWidth = CGFloat( (1 - ratioWidth) * self.view_container.frame.width)
+        let finalLength = CGFloat(ratioLength * self.view_container.frame.height)
         self.view_marker.center = CGPoint(x: finalWidth , y: finalLength )
         self.view_marker.setNeedsLayout()
         
