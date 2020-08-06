@@ -72,7 +72,7 @@ class Zone {
             let pointFloor = SCNVector3(x, y, z)
             self.polygon.append(pointFloor)
             
-            let pointRoof = SCNVector3(x + self.height, y + self.height, z + self.height)
+            let pointRoof = SCNVector3(x, y, z + self.height)
             self.polygon.append(pointRoof)
         }
         
