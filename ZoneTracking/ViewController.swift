@@ -64,16 +64,17 @@ class ViewController: UIViewController {
         self.locationManager.requestAlwaysAuthorization()
         self.locationManager.delegate = self
         
-        
+        /*
         self.floorPlan = FloorPlan(fileName: "FloorPlanHome", ext: "json")
         self.view_container.subviews.first?.isHidden = true
         self.view_container.backgroundColor = UIColor.gray
         self.view_container.widthAnchor.constraint(equalTo: self.view_container.heightAnchor, multiplier: 21.0/18.0).isActive = true
+        */
         
-        /*
+        
         self.floorPlan = FloorPlan(fileName: "FloorPlan", ext: "json")
         self.view_container.widthAnchor.constraint(equalTo: self.view_container.heightAnchor, multiplier: 780.0/1180.0).isActive = true
-        */
+        
         
         // extract devices and beaconregions for later use
         for zone in self.floorPlan.zones {
