@@ -53,10 +53,10 @@ class ViewController: UIViewController {
     var floorPlan : FloorPlan!
     var beaconRegions = [CLBeaconRegion]()
     var devices = [Device]()
-    
+    var deviceID : String!
     let UPDATE_SECONDS : TimeInterval = 5
     
-    let csvHeaderRow = ["sn", "time" ,"zone", "tzone", "b1Tag", "b2Tag", "b3Tag", "b1r", "b2r", "b3r", "b1d", "b2d", "b3d", "x", "y", "z", "xz", "yz", "zz", "xg", "yg", "zg"]
+    let csvHeaderRow = ["sn", "deviceID" ,"time" ,"zone", "tzone", "b1Tag", "b2Tag", "b3Tag", "b1r", "b2r", "b3r", "b1d", "b2d", "b3d", "x", "y", "z", "xz", "yz", "zz", "xg", "yg", "zg"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -381,24 +381,18 @@ extension ViewController : CLLocationManagerDelegate {
             self.txt_glZ.text = "Z: \(global.z)"
             
             rowDict["sn"] = "\(self.logRows.count - 1)"
+            rowDict["deviceID"] = self.deviceID
             rowDict["time"] = "\(Date().timeIntervalSince1970)"
             rowDict["zone"] = "\(self.selectedZone + 1)"
             
             let inZone = self.floorPlan.zones.filter { (zone) -> Bool in
                 if zone.contains(point: global) {
-                    print("PT: ", global!)
-                    print("Zone: \(zone.name!)")
-                    print("Origin:",zone.originPt!)
-                    print("Ending:",zone.endPt!)
-                    print("-- -- -- -- -- -- -- ")
                     return true
                 }
                 else {
                     return false
                 }
             }.first
-            
-            print("== == == == == == == == ==")
             
             if inZone == nil {
                 // TODO

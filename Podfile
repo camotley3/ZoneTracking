@@ -6,6 +6,7 @@ target 'ZoneTracking' do
   use_modular_headers!
   
   pod 'SwiftyJSON', '~> 4.0'
+  pod 'KeychainSwift'
 
   # Pods for RealTracking
 

@@ -9,6 +9,65 @@
     </dependencies>
     <scenes>
         <!--View Controller-->
+        <scene sceneID="9UL-F1-kwQ">
+            <objects>
+                <viewController id="gIx-gu-edC" customClass="UUIDViewController" customModule="ZoneTracking" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6sK-P1-A8X">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UUID:" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EvP-Fd-2DO">
+                                <rect key="frame" x="8" y="135.5" width="398" height="14.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bz6-9f-lJm">
+                                <rect key="frame" x="178.5" y="158" width="57" height="30"/>
+                                <state key="normal" title="Proceed"/>
+                                <connections>
+                                    <action selector="btn_proceed:" destination="gIx-gu-edC" eventType="touchUpInside" id="inB-Ks-28R"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Zone Tracking" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6lJ-7C-OoQ">
+                                <rect key="frame" x="145.5" y="60" width="123" height="21.5"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                <color key="textColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UUID:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BWO-XU-g1Z">
+                                <rect key="frame" x="8" y="110.5" width="40.5" height="17"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="RJb-BS-uSS" firstAttribute="trailing" secondItem="EvP-Fd-2DO" secondAttribute="trailing" constant="8" id="314-eJ-VHY"/>
+                            <constraint firstItem="EvP-Fd-2DO" firstAttribute="leading" secondItem="RJb-BS-uSS" secondAttribute="leading" constant="8" id="EaW-8a-Zew"/>
+                            <constraint firstItem="EvP-Fd-2DO" firstAttribute="centerX" secondItem="RJb-BS-uSS" secondAttribute="centerX" id="Ffb-8M-DU0"/>
+                            <constraint firstItem="Bz6-9f-lJm" firstAttribute="top" secondItem="EvP-Fd-2DO" secondAttribute="bottom" constant="8" id="Pg6-6R-MJm"/>
+                            <constraint firstItem="BWO-XU-g1Z" firstAttribute="leading" secondItem="RJb-BS-uSS" secondAttribute="leading" constant="8" id="Rsl-OU-UXY"/>
+                            <constraint firstItem="EvP-Fd-2DO" firstAttribute="top" secondItem="BWO-XU-g1Z" secondAttribute="bottom" constant="8" id="Tjk-KP-k4S"/>
+                            <constraint firstItem="Bz6-9f-lJm" firstAttribute="centerX" secondItem="RJb-BS-uSS" secondAttribute="centerX" id="VO9-px-Ilb"/>
+                            <constraint firstItem="EvP-Fd-2DO" firstAttribute="top" secondItem="6lJ-7C-OoQ" secondAttribute="bottom" constant="54" id="gpj-4G-o9Z"/>
+                            <constraint firstItem="6lJ-7C-OoQ" firstAttribute="top" secondItem="RJb-BS-uSS" secondAttribute="top" constant="16" id="nh5-yl-S2f"/>
+                            <constraint firstItem="6lJ-7C-OoQ" firstAttribute="centerX" secondItem="RJb-BS-uSS" secondAttribute="centerX" id="xlz-7E-XWZ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="RJb-BS-uSS"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="dN1-vZ-fnn"/>
+                    <connections>
+                        <outlet property="lbl_uuid" destination="EvP-Fd-2DO" id="bV2-QR-KLT"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="sw_track" id="gdn-Ta-Gmw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zQF-7Q-AfN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="960.86956521739137" y="118.52678571428571"/>
+        </scene>
+        <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="ZoneTracking" customModuleProvider="target" sceneMemberID="viewController">
@@ -264,7 +323,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1039.1304347826087" y="126.5625"/>
+            <point key="canvasLocation" x="1730" y="119"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="eLi-WP-dcG">
@@ -276,12 +335,12 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="uN1-Es-xDm"/>
+                        <segue destination="gIx-gu-edC" kind="relationship" relationship="rootViewController" id="xNw-7G-gvi"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A8w-6G-S6Z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="137.68115942028987" y="126.5625"/>
+            <point key="canvasLocation" x="107" y="119"/>
         </scene>
     </scenes>
     <resources>

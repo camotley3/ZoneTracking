@@ -19,6 +19,7 @@
 		38A5E6C824B4E02500D02D81 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A5E6C724B4E02500D02D81 /* Extensions.swift */; };
 		38A5E6CA24B4E20E00D02D81 /* Trilateration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A5E6C924B4E20E00D02D81 /* Trilateration.swift */; };
 		38A5E6D024B4FE5900D02D81 /* FloorPlan.json in Resources */ = {isa = PBXBuildFile; fileRef = 38A5E6CF24B4FE5900D02D81 /* FloorPlan.json */; };
+		38F8831824E7110F004F8F12 /* UUIDViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38F8831724E7110F004F8F12 /* UUIDViewController.swift */; };
 		97C8C6AFDE78FAC019EC7C26 /* libPods-ZoneTracking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E7ADE007F86388817C16F9D /* libPods-ZoneTracking.a */; };
 /* End PBXBuildFile section */
 
@@ -38,6 +39,7 @@
 		38A5E6C924B4E20E00D02D81 /* Trilateration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Trilateration.swift; sourceTree = "<group>"; };
 		38A5E6CD24B4EB6400D02D81 /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
 		38A5E6CF24B4FE5900D02D81 /* FloorPlan.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = FloorPlan.json; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.json; };
+		38F8831724E7110F004F8F12 /* UUIDViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UUIDViewController.swift; sourceTree = "<group>"; };
 		50F33FB31138372F96EC5F63 /* Pods-RealTracking.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RealTracking.debug.xcconfig"; path = "Target Support Files/Pods-RealTracking/Pods-RealTracking.debug.xcconfig"; sourceTree = "<group>"; };
 		5E7ADE007F86388817C16F9D /* libPods-ZoneTracking.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ZoneTracking.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		902A67378013E00DC7AC127F /* Pods-RealTracking.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RealTracking.release.xcconfig"; path = "Target Support Files/Pods-RealTracking/Pods-RealTracking.release.xcconfig"; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 				38A2776A24DAA07F00AA928E /* FloorPlanHome.json */,
 				38A5E6CE24B4F3DE00D02D81 /* Helper */,
 				38A5E6B524B4DFAE00D02D81 /* ViewController.swift */,
+				38F8831724E7110F004F8F12 /* UUIDViewController.swift */,
 				38A5E6B724B4DFAE00D02D81 /* Main.storyboard */,
 				38A5E6BA24B4DFB000D02D81 /* Assets.xcassets */,
 				38A5E6BC24B4DFB000D02D81 /* LaunchScreen.storyboard */,
@@ -227,6 +230,7 @@
 				38A5E6B624B4DFAE00D02D81 /* ViewController.swift in Sources */,
 				38A5E6CA24B4E20E00D02D81 /* Trilateration.swift in Sources */,
 				384A88B524BCBD5B00894EC3 /* Models.swift in Sources */,
+				38F8831824E7110F004F8F12 /* UUIDViewController.swift in Sources */,
 				38A5E6B224B4DFAE00D02D81 /* AppDelegate.swift in Sources */,
 				38A5E6B424B4DFAE00D02D81 /* SceneDelegate.swift in Sources */,
 			);
