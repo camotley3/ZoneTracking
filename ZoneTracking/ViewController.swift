@@ -381,7 +381,7 @@ extension ViewController : CLLocationManagerDelegate {
             self.txt_glZ.text = "Z: \(global.z)"
             
             rowDict["sn"] = "\(self.logRows.count - 1)"
-            rowDict["deviceID"] = self.deviceID
+            rowDict["deviceID"] = self.deviceID!
             rowDict["time"] = "\(Date().timeIntervalSince1970)"
             rowDict["zone"] = "\(self.selectedZone + 1)"
             
