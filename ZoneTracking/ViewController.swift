@@ -10,6 +10,7 @@ import UIKit
 import SceneKit
 import CoreLocation
 import MessageUI
+import RealmSwift
 
 class ViewController: UIViewController {
     
@@ -34,9 +35,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var lbl_count: UILabel!
     
-    // -8dmb -70dbm
-    
-    var logRows = [[String]]()
+    let realm = try! Realm()
     
     let view_marker : UIView = {
         let view = UIView()
@@ -56,7 +55,9 @@ class ViewController: UIViewController {
     var deviceID : String!
     let UPDATE_SECONDS : TimeInterval = 5
     
+    /*
     let csvHeaderRow = ["sn", "deviceID" ,"time" ,"zone", "tzone", "b1Tag", "b2Tag", "b3Tag", "b1r", "b2r", "b3r", "b1d", "b2d", "b3d", "x", "y", "z", "xz", "yz", "zz", "xg", "yg", "zg"]
+    */
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,11 +66,11 @@ class ViewController: UIViewController {
         self.locationManager.delegate = self
         
         /*
-        self.floorPlan = FloorPlan(fileName: "FloorPlanHome", ext: "json")
-        self.view_container.subviews.first?.isHidden = true
-        self.view_container.backgroundColor = UIColor.gray
-        self.view_container.widthAnchor.constraint(equalTo: self.view_container.heightAnchor, multiplier: 21.0/18.0).isActive = true
-        */
+         self.floorPlan = FloorPlan(fileName: "FloorPlanHome", ext: "json")
+         self.view_container.subviews.first?.isHidden = true
+         self.view_container.backgroundColor = UIColor.gray
+         self.view_container.widthAnchor.constraint(equalTo: self.view_container.heightAnchor, multiplier: 21.0/18.0).isActive = true
+         */
         
         
         self.floorPlan = FloorPlan(fileName: "FloorPlan", ext: "json")
@@ -96,7 +97,6 @@ class ViewController: UIViewController {
         self.view_sliderY.maximumValue = Float(self.floorPlan.zones[0].length)
         self.view_sliderZ.maximumValue = Float(self.floorPlan.zones[0].height)
         
-        self.logRows.append(csvHeaderRow)
     }
     
     // start region monitoring
@@ -249,12 +249,41 @@ class ViewController: UIViewController {
         }
         
         var finalString = ""
+        finalString.append("sn,deviceID,time,zone,tzone,b1Tag,b2Tag,b3Tag,b1r,b2r,b3r,b1d,b2d,b3d,x,y,z,xz,yz,zz,xg,yg,zg\n")
         
-        for i in 0..<self.logRows.count {
-            for j in 0..<self.logRows[i].count {
-                finalString.append(self.logRows[i][j])
-                finalString.append(",")
-            }
+        let rows = self.realm.objects(LogRow.self)
+        for row in rows {
+            finalString.append("\(row.sn)" + ",")
+            finalString.append(row.deviceID + ",")
+            finalString.append("\(row.time)" + ",")
+            
+            finalString.append(row.zzone + ",")
+            finalString.append(row.tzone + ",")
+            
+            finalString.append(row.b1Tag + ",")
+            finalString.append(row.b2Tag + ",")
+            finalString.append(row.b3Tag + ",")
+            
+            finalString.append("\(row.b1r)" + ",")
+            finalString.append("\(row.b2r)" + ",")
+            finalString.append("\(row.b3r)" + ",")
+            
+            finalString.append("\(row.b1d)" + ",")
+            finalString.append("\(row.b2d)" + ",")
+            finalString.append("\(row.b3d)" + ",")
+            
+            finalString.append("\(row.x)" + ",")
+            finalString.append("\(row.y)" + ",")
+            finalString.append("\(row.z)" + ",")
+            
+            finalString.append("\(row.xz)" + ",")
+            finalString.append("\(row.yz)" + ",")
+            finalString.append("\(row.zz)" + ",")
+            
+            finalString.append("\(row.xg)" + ",")
+            finalString.append("\(row.yg)" + ",")
+            finalString.append("\(row.zg)" + ",")
+            
             finalString.append("\n")
         }
         
@@ -374,16 +403,16 @@ extension ViewController : CLLocationManagerDelegate {
         
         Trilaterator.shared.trilaterate(finalBeacons, success: { (global : SCNVector3! ) in
             
-            var rowDict:[String?:String?] = [String:String]()
+            let newRow = LogRow()
             
             self.txt_glX.text = "X: \(global.x)"
             self.txt_glY.text = "Y: \(global.y)"
             self.txt_glZ.text = "Z: \(global.z)"
             
-            rowDict["sn"] = "\(self.logRows.count - 1)"
-            rowDict["deviceID"] = self.deviceID!
-            rowDict["time"] = "\(Date().timeIntervalSince1970)"
-            rowDict["zone"] = "\(self.selectedZone + 1)"
+            newRow.sn = self.realm.objects(LogRow.self).count
+            newRow.deviceID = self.deviceID!
+            newRow.time = Date().timeIntervalSince1970
+            newRow.zzone = "\(self.selectedZone + 1)"
             
             let inZone = self.floorPlan.zones.filter { (zone) -> Bool in
                 if zone.contains(point: global) {
@@ -395,19 +424,19 @@ extension ViewController : CLLocationManagerDelegate {
             }.first
             
             if inZone == nil {
-                // TODO
                 self.txt_zone.text = "Zone: -"
                 self.txt_llX.text = "X: -"
                 self.txt_llY.text = "Y: -"
                 self.txt_llZ.text = "Z: -"
                 
-                rowDict["tzone"] = "-"
-                rowDict["xz"] = "-"
-                rowDict["yz"] = "-"
-                rowDict["zz"] = "-"
+                newRow.tzone  = "-"
+                newRow.xz = "-"
+                newRow.yz = "-"
+                newRow.zz = "-"
                 
             }
             else {
+                
                 self.txt_zone.text = "Zone: \(inZone!.name!)"
                 let locX = global.x -  inZone!.originPt.x
                 let locY = global.y -  inZone!.originPt.y
@@ -416,39 +445,37 @@ extension ViewController : CLLocationManagerDelegate {
                 self.txt_llY.text = "Y: \(locY)"
                 self.txt_llZ.text = "Z: \(locZ)"
                 
-                rowDict["tzone"] = "\(inZone!.zoneID!)"
-                rowDict["xz"] = "\(locX)"
-                rowDict["yz"] = "\(locY)"
-                rowDict["zz"] = "\(locZ)"
+                newRow.tzone = "\(inZone!.zoneID!)"
+                newRow.xz = "\(locX)"
+                newRow.yz = "\(locY)"
+                newRow.zz = "\(locZ)"
             }
             
-            rowDict["b1Tag"] = "\(finalBeacons[0].deviceID!)"
-            rowDict["b2Tag"] = "\(finalBeacons[1].deviceID!)"
-            rowDict["b3Tag"] = "\(finalBeacons[2].deviceID!)"
+            newRow.b1Tag = "\(finalBeacons[0].deviceID!)"
+            newRow.b2Tag = "\(finalBeacons[1].deviceID!)"
+            newRow.b3Tag = "\(finalBeacons[2].deviceID!)"
             
-            rowDict["b1r"] = "\(finalBeacons[0].avg_rssi)"
-            rowDict["b2r"] = "\(finalBeacons[1].avg_rssi)"
-            rowDict["b3r"] = "\(finalBeacons[2].avg_rssi)"
+            newRow.b1r = finalBeacons[0].avg_rssi
+            newRow.b2r = finalBeacons[1].avg_rssi
+            newRow.b3r = finalBeacons[2].avg_rssi
             
-            rowDict["b1d"] = "\(finalBeacons[0].distance)"
-            rowDict["b2d"] = "\(finalBeacons[1].distance)"
-            rowDict["b3d"] = "\(finalBeacons[2].distance)"
+            newRow.b1d = finalBeacons[0].distance
+            newRow.b2d = finalBeacons[1].distance
+            newRow.b3d = finalBeacons[2].distance
             
-            rowDict["x"] = "\(self.view_sliderX.value)"
-            rowDict["y"] = "\(self.view_sliderY.value)"
-            rowDict["z"] = "\(self.view_sliderZ.value)"
+            newRow.x = Double(self.view_sliderX.value)
+            newRow.y = Double(self.view_sliderY.value)
+            newRow.z = Double(self.view_sliderZ.value)
             
-            rowDict["xg"] = "\(global.x)"
-            rowDict["yg"] = "\(global.y)"
-            rowDict["zg"] = "\(global.z)"
+            newRow.xg = Double(global.x)
+            newRow.yg = Double(global.y)
+            newRow.zg = Double(global.z)
             
-            var finalRow = [String]()
-            for key in self.csvHeaderRow {
-                finalRow.append(rowDict[key]!!)
+            try! self.realm.write {
+                self.realm.add(newRow)
             }
             
-            self.logRows.append(finalRow)
-            self.lbl_count.text = "Log: \(self.logRows.count - 1)"
+            self.lbl_count.text = "\(newRow.sn)"
             
             if global.x.isNaN || global.y.isNaN || global.z.isNaN {
                 

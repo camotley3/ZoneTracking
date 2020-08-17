@@ -12,6 +12,7 @@ import SceneKit
 import CoreLocation
 import CoreGraphics
 import SwiftyJSON
+import RealmSwift
 
 class FloorPlan {
     
@@ -227,5 +228,42 @@ class Queue<T> {
     func reset() {
         self.list.removeAll()
     }
+    
+}
+
+
+let csvHeaderRow = ["sn", "deviceID" ,"time" ,"zone", "tzone", "b1Tag", "b2Tag", "b3Tag", "b1r", "b2r", "b3r", "b1d", "b2d", "b3d", "x", "y", "z", "xz", "yz", "zz", "xg", "yg", "zg"]
+
+class LogRow : Object {
+    
+    @objc dynamic var sn = 0
+    @objc var deviceID = ""
+    @objc var time = 0.0
+    @objc var zzone = ""
+    @objc var tzone = ""
+    
+    @objc var b1Tag = ""
+    @objc var b2Tag = ""
+    @objc var b3Tag = ""
+    
+    @objc var b1r = 0.0
+    @objc var b2r = 0.0
+    @objc var b3r = 0.0
+    
+    @objc var b1d = 0.0
+    @objc var b2d = 0.0
+    @objc var b3d = 0.0
+    
+    @objc var x = 0.0
+    @objc var y = 0.0
+    @objc var z = 0.0
+    
+    @objc var xz = ""
+    @objc var yz = ""
+    @objc var zz = ""
+    
+    @objc var xg = 0.0
+    @objc var yg = 0.0
+    @objc var zg = 0.0
     
 }

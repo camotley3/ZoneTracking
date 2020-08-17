@@ -7,6 +7,7 @@ target 'ZoneTracking' do
   
   pod 'SwiftyJSON', '~> 4.0'
   pod 'KeychainSwift'
+  pod 'RealmSwift'
 
   # Pods for RealTracking
 
