@@ -8,10 +8,14 @@
 
 import UIKit
 import KeychainSwift
+import RealmSwift
 
 class UUIDViewController: UIViewController {
     
+    @IBOutlet weak var btn_proceedOld: UIButton!
     @IBOutlet weak var lbl_uuid: UILabel!
+    
+    let realm = try! Realm()
     
     let keychain = KeychainSwift()
     var deviceID : String!
@@ -30,10 +34,22 @@ class UUIDViewController: UIViewController {
             self.lbl_uuid.text = self.deviceID!
         }
         
+        self.btn_proceedOld.setTitle("Proceed - Append - \(self.realm.objects(LogRow.self).count)", for: .normal)
+        
     }
     
     
-    @IBAction func btn_proceed(_ sender: UIButton) {
+    @IBAction func btn_new(_ sender: UIButton) {
+        
+        let objects = self.realm.objects(LogRow.self)
+        try! self.realm.write {
+            self.realm.delete(objects)
+        }
+        
+        self.performSegue(withIdentifier: "sw_track", sender: nil)
+    }
+    
+    @IBAction func btn_old(_ sender: UIButton) {
         self.performSegue(withIdentifier: "sw_track", sender: nil)
     }
     
@@ -43,15 +59,5 @@ class UUIDViewController: UIViewController {
             destVC.deviceID = self.deviceID
         }
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="IE6-8Q-zb9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="IE6-8Q-zb9">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -23,10 +23,19 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bz6-9f-lJm">
-                                <rect key="frame" x="178.5" y="158" width="57" height="30"/>
-                                <state key="normal" title="Proceed"/>
+                                <rect key="frame" x="152.5" y="194" width="109" height="32"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title="Proceed - New"/>
                                 <connections>
-                                    <action selector="btn_proceed:" destination="gIx-gu-edC" eventType="touchUpInside" id="inB-Ks-28R"/>
+                                    <action selector="btn_new:" destination="gIx-gu-edC" eventType="touchUpInside" id="GRu-Mh-740"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2tO-GS-Gt0">
+                                <rect key="frame" x="156" y="238" width="102" height="32"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title="Proceed - Old"/>
+                                <connections>
+                                    <action selector="btn_old:" destination="gIx-gu-edC" eventType="touchUpInside" id="WZX-SG-pjz"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Zone Tracking" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6lJ-7C-OoQ">
@@ -47,18 +56,21 @@
                             <constraint firstItem="RJb-BS-uSS" firstAttribute="trailing" secondItem="EvP-Fd-2DO" secondAttribute="trailing" constant="8" id="314-eJ-VHY"/>
                             <constraint firstItem="EvP-Fd-2DO" firstAttribute="leading" secondItem="RJb-BS-uSS" secondAttribute="leading" constant="8" id="EaW-8a-Zew"/>
                             <constraint firstItem="EvP-Fd-2DO" firstAttribute="centerX" secondItem="RJb-BS-uSS" secondAttribute="centerX" id="Ffb-8M-DU0"/>
-                            <constraint firstItem="Bz6-9f-lJm" firstAttribute="top" secondItem="EvP-Fd-2DO" secondAttribute="bottom" constant="8" id="Pg6-6R-MJm"/>
+                            <constraint firstItem="Bz6-9f-lJm" firstAttribute="top" secondItem="EvP-Fd-2DO" secondAttribute="bottom" constant="44" id="Pg6-6R-MJm"/>
+                            <constraint firstItem="2tO-GS-Gt0" firstAttribute="top" secondItem="Bz6-9f-lJm" secondAttribute="bottom" constant="12" id="Q1A-IM-dSZ"/>
                             <constraint firstItem="BWO-XU-g1Z" firstAttribute="leading" secondItem="RJb-BS-uSS" secondAttribute="leading" constant="8" id="Rsl-OU-UXY"/>
                             <constraint firstItem="EvP-Fd-2DO" firstAttribute="top" secondItem="BWO-XU-g1Z" secondAttribute="bottom" constant="8" id="Tjk-KP-k4S"/>
                             <constraint firstItem="Bz6-9f-lJm" firstAttribute="centerX" secondItem="RJb-BS-uSS" secondAttribute="centerX" id="VO9-px-Ilb"/>
                             <constraint firstItem="EvP-Fd-2DO" firstAttribute="top" secondItem="6lJ-7C-OoQ" secondAttribute="bottom" constant="54" id="gpj-4G-o9Z"/>
                             <constraint firstItem="6lJ-7C-OoQ" firstAttribute="top" secondItem="RJb-BS-uSS" secondAttribute="top" constant="16" id="nh5-yl-S2f"/>
                             <constraint firstItem="6lJ-7C-OoQ" firstAttribute="centerX" secondItem="RJb-BS-uSS" secondAttribute="centerX" id="xlz-7E-XWZ"/>
+                            <constraint firstItem="2tO-GS-Gt0" firstAttribute="centerX" secondItem="RJb-BS-uSS" secondAttribute="centerX" id="xoU-cw-cWP"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="RJb-BS-uSS"/>
                     </view>
                     <navigationItem key="navigationItem" id="dN1-vZ-fnn"/>
                     <connections>
+                        <outlet property="btn_proceedOld" destination="2tO-GS-Gt0" id="sb3-Kz-p9S"/>
                         <outlet property="lbl_uuid" destination="EvP-Fd-2DO" id="bV2-QR-KLT"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="sw_track" id="gdn-Ta-Gmw"/>
                     </connections>
