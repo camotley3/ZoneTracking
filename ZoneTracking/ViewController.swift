@@ -65,17 +65,17 @@ class ViewController: UIViewController {
         self.locationManager.requestAlwaysAuthorization()
         self.locationManager.delegate = self
         
-        /*
+        
          self.floorPlan = FloorPlan(fileName: "FloorPlanHome", ext: "json")
          self.view_container.subviews.first?.isHidden = true
          self.view_container.backgroundColor = UIColor.gray
          self.view_container.widthAnchor.constraint(equalTo: self.view_container.heightAnchor, multiplier: 21.0/18.0).isActive = true
-         */
         
         
+        /*
         self.floorPlan = FloorPlan(fileName: "FloorPlan", ext: "json")
         self.view_container.widthAnchor.constraint(equalTo: self.view_container.heightAnchor, multiplier: 780.0/1180.0).isActive = true
-        
+        */
         
         // extract devices and beaconregions for later use
         for zone in self.floorPlan.zones {
@@ -252,40 +252,45 @@ class ViewController: UIViewController {
         finalString.append("sn,deviceID,time,zone,tzone,b1Tag,b2Tag,b3Tag,b1r,b2r,b3r,b1d,b2d,b3d,x,y,z,xz,yz,zz,xg,yg,zg\n")
         
         let rows = self.realm.objects(LogRow.self)
+        
         for row in rows {
-            finalString.append("\(row.sn)" + ",")
-            finalString.append(row.deviceID + ",")
-            finalString.append("\(row.time)" + ",")
             
-            finalString.append(row.zzone + ",")
-            finalString.append(row.tzone + ",")
+            finalString.append("\(row.sn),")
+            finalString.append("\(row.deviceID),")
+            finalString.append("\(row.time),")
             
-            finalString.append(row.b1Tag + ",")
-            finalString.append(row.b2Tag + ",")
-            finalString.append(row.b3Tag + ",")
+            finalString.append("\(row.zzone),")
+            finalString.append("\(row.tzone),")
             
-            finalString.append("\(row.b1r)" + ",")
-            finalString.append("\(row.b2r)" + ",")
-            finalString.append("\(row.b3r)" + ",")
+            finalString.append("\(row.b1Tag),")
+            finalString.append("\(row.b2Tag),")
+            finalString.append("\(row.b3Tag),")
             
-            finalString.append("\(row.b1d)" + ",")
-            finalString.append("\(row.b2d)" + ",")
-            finalString.append("\(row.b3d)" + ",")
+            finalString.append("\(row.b1r),")
+            finalString.append("\(row.b2r),")
+            finalString.append("\(row.b3r),")
             
-            finalString.append("\(row.x)" + ",")
-            finalString.append("\(row.y)" + ",")
-            finalString.append("\(row.z)" + ",")
+            finalString.append("\(row.b1d),")
+            finalString.append("\(row.b2d),")
+            finalString.append("\(row.b3d),")
             
-            finalString.append("\(row.xz)" + ",")
-            finalString.append("\(row.yz)" + ",")
-            finalString.append("\(row.zz)" + ",")
+            finalString.append("\(row.x),")
+            finalString.append("\(row.y),")
+            finalString.append("\(row.z),")
             
-            finalString.append("\(row.xg)" + ",")
-            finalString.append("\(row.yg)" + ",")
-            finalString.append("\(row.zg)" + ",")
+            finalString.append("\(row.xz),")
+            finalString.append("\(row.yz),")
+            finalString.append("\(row.zz),")
+            
+            finalString.append("\(row.xg),")
+            finalString.append("\(row.yg),")
+            finalString.append("\(row.zg)")
             
             finalString.append("\n")
+            
         }
+        
+        print(finalString)
         
         let df = DateFormatter()
         df.dateFormat = "dd-mm___hh-mm"

@@ -234,36 +234,37 @@ class Queue<T> {
 
 let csvHeaderRow = ["sn", "deviceID" ,"time" ,"zone", "tzone", "b1Tag", "b2Tag", "b3Tag", "b1r", "b2r", "b3r", "b1d", "b2d", "b3d", "x", "y", "z", "xz", "yz", "zz", "xg", "yg", "zg"]
 
+
 class LogRow : Object {
     
     @objc dynamic var sn = 0
-    @objc var deviceID = ""
-    @objc var time = 0.0
-    @objc var zzone = ""
-    @objc var tzone = ""
+    @objc dynamic var deviceID = ""
+    @objc dynamic var time = 0.0
+    @objc dynamic var zzone = ""
+    @objc dynamic var tzone = ""
     
-    @objc var b1Tag = ""
-    @objc var b2Tag = ""
-    @objc var b3Tag = ""
+    @objc dynamic var b1Tag = ""
+    @objc dynamic var b2Tag = ""
+    @objc dynamic var b3Tag = ""
     
-    @objc var b1r = 0.0
-    @objc var b2r = 0.0
-    @objc var b3r = 0.0
+    @objc dynamic var b1r = 0.0
+    @objc dynamic var b2r = 0.0
+    @objc dynamic var b3r = 0.0
     
-    @objc var b1d = 0.0
-    @objc var b2d = 0.0
-    @objc var b3d = 0.0
+    @objc dynamic var b1d = 0.0
+    @objc dynamic var b2d = 0.0
+    @objc dynamic var b3d = 0.0
     
-    @objc var x = 0.0
-    @objc var y = 0.0
-    @objc var z = 0.0
+    @objc dynamic var x = 0.0
+    @objc dynamic var y = 0.0
+    @objc dynamic var z = 0.0
     
-    @objc var xz = ""
-    @objc var yz = ""
-    @objc var zz = ""
+    @objc dynamic var xz = ""
+    @objc dynamic var yz = ""
+    @objc dynamic var zz = ""
     
-    @objc var xg = 0.0
-    @objc var yg = 0.0
-    @objc var zg = 0.0
+    @objc dynamic var xg = 0.0
+    @objc dynamic var yg = 0.0
+    @objc dynamic var zg = 0.0
     
 }
