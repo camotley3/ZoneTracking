@@ -22,6 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.rootViewController = rootVC
         self.window?.makeKeyAndVisible()
         
+        let distance =  pow(10 , ( (-100 - (-97) ) / (10.0 * 2.0) ))
+        print("Distance: \(distance)")
+        
         return true
     }
 
