@@ -280,8 +280,36 @@ class ViewController: UIViewController {
         let percTracked = (trackedSamples / totalSamples) * 100
         let percUnTracked = (unTrackedSamples / totalSamples) * 100
         
-        let finalString = "Total Samples: \(totalSamples) \nTracked Samples: \(trackedSamples!) - Perc: \(percTracked) \nUntracked Samples: \(unTrackedSamples!) - Perc:\(percUnTracked) \n  "
         
+        var deltaXSum : Double! = 0
+        var deltaYSum : Double! = 0
+        var deltaZSum : Double! = 0
+        var deltaCount : Double! = 0
+        
+        for row in rows {
+            
+            guard let xz = Double(row.xz) else {
+                continue
+            }
+            guard let yz = Double(row.yz) else {
+                continue
+            }
+            guard let zz = Double(row.zz) else {
+                continue
+            }
+            
+            deltaXSum += abs(xz - row.x)
+            deltaYSum += abs(yz - row.y)
+            deltaZSum += abs(zz - row.z)
+            
+            deltaCount += 1
+        }
+        
+        let deltaAVGX = deltaXSum / deltaCount
+        let deltaAVGY = deltaXSum / deltaCount
+        let deltaAVGZ = deltaXSum / deltaCount
+        
+        let finalString = "Total Samples: \(totalSamples) \nTracked Samples: \(trackedSamples!) - Perc: \(percTracked) \nUntracked Samples: \(unTrackedSamples!) - Perc:\(percUnTracked) \n\nAVG-Delta-X: \(deltaAVGX) \nAVG-Delta-Y: \(deltaAVGY)\nAVG-Delta-Z: \(deltaAVGZ)"
         self.exportView.txtInfo.text = finalString
         
     }
