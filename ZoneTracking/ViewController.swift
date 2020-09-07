@@ -55,9 +55,16 @@ class ViewController: UIViewController {
     var deviceID : String!
     let UPDATE_SECONDS : TimeInterval = 5
     
-    /*
-    let csvHeaderRow = ["sn", "deviceID" ,"time" ,"zone", "tzone", "b1Tag", "b2Tag", "b3Tag", "b1r", "b2r", "b3r", "b1d", "b2d", "b3d", "x", "y", "z", "xz", "yz", "zz", "xg", "yg", "zg"]
-    */
+    lazy var exportView : ExportView = {
+        let exv = ExportView()
+        exv.translatesAutoresizingMaskIntoConstraints = false
+        exv.isHidden = true
+        exv.layer.borderColor = UIColor.blue.cgColor
+        exv.layer.borderWidth = 1
+        exv.vc = self
+        return exv
+    }()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -95,6 +102,12 @@ class ViewController: UIViewController {
         self.view_sliderX.maximumValue = Float(self.floorPlan.zones[0].width)
         self.view_sliderY.maximumValue = Float(self.floorPlan.zones[0].length)
         self.view_sliderZ.maximumValue = Float(self.floorPlan.zones[0].height)
+        
+        self.view.addSubview(self.exportView)
+        self.exportView.widthAnchor.constraint(equalTo: self.exportView.heightAnchor, multiplier: 1).isActive = true
+        self.exportView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 8).isActive = true
+        self.exportView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -8).isActive = true
+        self.exportView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor).isActive = true
         
     }
     
@@ -247,6 +260,35 @@ class ViewController: UIViewController {
             self.btn_startStop(UIButton())
         }
         
+        self.exportView.isHidden = false
+        
+        let rows = self.realm.objects(LogRow.self)
+        
+        let totalSamples : Double = Double(rows.count)
+        var trackedSamples : Double! = 0
+        var unTrackedSamples : Double! = 0
+        
+        for row in rows {
+            if row.tzone == row.zzone {
+                trackedSamples += 1
+            }
+            else {
+                unTrackedSamples += 1
+            }
+        }
+        
+        let percTracked = (trackedSamples / totalSamples) * 100
+        let percUnTracked = (unTrackedSamples / totalSamples) * 100
+        
+        let finalString = "Total Samples: \(totalSamples) \nTracked Samples: \(trackedSamples!) - Perc: \(percTracked) \nUntracked Samples: \(unTrackedSamples!) - Perc:\(percUnTracked) \n  "
+        
+        self.exportView.txtInfo.text = finalString
+        
+    }
+    
+    
+    func export() {
+        
         var finalString = ""
         finalString.append("sn,deviceID,time,zone,tzone,b1Tag,b2Tag,b3Tag,b1r,b2r,b3r,b1d,b2d,b3d,x,y,z,xz,yz,zz,xg,yg,zg\n")
         
@@ -289,8 +331,6 @@ class ViewController: UIViewController {
             
         }
         
-        print(finalString)
-        
         let df = DateFormatter()
         df.dateFormat = "dd-mm___hh-mm"
         let dateString = df.string(from: Date())
@@ -312,6 +352,7 @@ class ViewController: UIViewController {
         }
         
     }
+    
     
     @IBAction func seg_width(_ sender: UISlider) {
         self.lbl_width.text = "X: \(sender.value)"
